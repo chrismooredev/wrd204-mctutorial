@@ -13,13 +13,25 @@
 	}
 
 mixin icon(icondesc)
+	-
+		let classes, content;
+		switch(icondesc[0]) {
+			case 'material-icons':
+				classes = ['']
+			case 'fas':
+			case 'fab':
+				icondesc[1] = 'fa-'+icondesc[1];
+				classes = icondesc
+		}
+	
+	
 	case icondesc[0]
 		when 'material-icons'
 			span(aria-hidden='true', class=['mdc-tab__icon', icondesc[0]])= icondesc[1]
 		when 'fas'
 		when 'fab'
 			- icondesc[1] = 'fa-' + icondesc[1]
-			i(aria-hidden='true', class=icondesc)
+			span(aria-hidden='true', class=icondesc)
 		default
 			- throw new Error('Unknown tab icon type: ' + icondesc[0]);
 
@@ -53,10 +65,17 @@ mixin mdc_button(ido, text)
 mixin mdc_typography(ido, default_text)
 	.mdc-typography.mdc-typography--overline(id='container-'+ido)
 
+- const iconDescriptor = (font, name) => ({ hasImageIcon: true, icon })
+
 html
 	head
 		meta(charset='UTF-8')
-		title Heyo!
+		title Heyo! (feat. Web Components!)
+
+		script(type='text/javascript', src='../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js')
+		link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Roboto:300,400,500")
+		link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Material+Icons&display=block")
+		
 
 		link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
 		<!-- Required styles for MDC Web -->
@@ -65,15 +84,25 @@ html
 		script(type='text/javascript', src='https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js')
 
 	body
-		h6(class=['mdc-typography', 'mdc-typography--headline6', 'demo-headline']) MDC Web Quick Start
-		//- mdc_text_field('fname-text-field2', 'First2 Name')
-		+mdc_text_field('fname-text-field', 'First Name')
-		+mdc_text_field('lname-text-field', 'Last Name')
-		+mdc_button('greet-button', 'Greet')
-		+mdc_typography('greet-message', undefined)
-		//- button(class=['mdc-button', 'greet-button'], id='container-greet-button') Greet
-		//- div(class=['mdc-typography', 'mdc-typography--overline', 'greet-message'])
-		yo-whaddup-btn
+		h6.mdc-typography.mdc-typography--headline6.demo-headline MDC Web Quick Start
+		mwc-textfield(id='nameFirst', label='First Name')
+		mwc-textfield(id='nameLast', label='Last Name')
+		mwc-button(id='btnGreet' label='Greet Me!' raised)
+		#txtGreet
+		
+		span
+			span I would prefer instructions for...
+			mwc-tab-bar#tabsChooseOS
+				mwc-tab(label='Windows' hasImageIcon)
+				mwc-tab(label='macOS/Linux' hasImageIcon)
+		// tab bar content here, with dynamic content switching?
+		.dependant_on_tabs
+			.windows
+				div Windows Instructions! :D
+			.unix(hidden)
+				div Unix Instructions! :D
+
+		h6.mdc-typography.mdc-typography--headline6.demo-headline MDC Web Quick Start
 
 		// use Markdown for content, MDC for formatting? https://pugjs.org/language/filters.html
 

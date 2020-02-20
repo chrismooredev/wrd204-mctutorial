@@ -14,12 +14,36 @@
 //@import "@fortawesome/fontawesome-free/scss/solid";
 //@import "@fortawesome/fontawesome-free/scss/brands";
 
+/** palette.sass */
+$primary-color-dark:   #388E3C;
+$primary-color:        #4CAF50;
+$primary-color-light:  #C8E6C9;
+$primary-color-text:   #FFFFFF;
+$accent-color:         #795548;
+$primary-text-color:   #212121;
+$secondary-text-color: #757575;
+$divider-color:        #BDBDBD;
+
+/* Styling */
 html, body {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
 	margin-top: 48px;
+	color: #cccccc;
+	background-color: #444444;
+	--mdc-theme-primary: #{$primary-color};
+	--mdc-theme-secondary: #{$accent-color};
+	--mdc-secondary-text-color: #{$secondary-text-color};
+	--mdc-tab-color-default: #{$accent-color};
+}
+
+mwc-textfield {
+	margin: 8px;
+}
+mwc-button {
+	margin: 8px;
 }
 
 .demo-headline {
@@ -34,3 +58,7 @@ html, body {
 .greet-message {
 	margin-top: 48px; 
 }
+
+// not reflected in current palette.sass
+//primary - green - 4caf50
+//secondary - brown - 8d6e63
