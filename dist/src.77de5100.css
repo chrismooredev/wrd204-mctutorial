@@ -7078,12 +7078,28 @@ svg.mdc-button__icon {
   --mdc-ripple-fg-opacity: 0.12;
 }
 
+/** palette.sass */
+/* Styling */
 html, body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   margin-top: 48px;
+  color: #cccccc;
+  background-color: #444444;
+  --mdc-theme-primary: #4CAF50;
+  --mdc-theme-secondary: #795548;
+  --mdc-secondary-text-color: #757575;
+  --mdc-tab-color-default: #795548;
+}
+
+mwc-textfield {
+  margin: 8px;
+}
+
+mwc-button {
+  margin: 8px;
 }
 
 .demo-headline {
