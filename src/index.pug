@@ -1,0 +1,94 @@
+
+-
+	const AutoInitAttr = (type) => ({ 'data-mdc-auto-init': type })
+	const fgen = (first, second) => {
+		let isFirst = true
+		return () => {
+			if(!isFirst){
+				return second
+			}
+			isFirst = false
+			return first
+		}
+	}
+
+mixin icon(icondesc)
+	case icondesc[0]
+		when 'material-icons'
+			span(aria-hidden='true', class=['mdc-tab__icon', icondesc[0]])= icondesc[1]
+		when 'fas'
+		when 'fab'
+			- icondesc[1] = 'fa-' + icondesc[1]
+			i(aria-hidden='true', class=icondesc)
+		default
+			- throw new Error('Unknown tab icon type: ' + icondesc[0]);
+
+mixin mdc_text_field(ido, text)
+	.mdc-text-field(id='container-'+ido)&attributes(AutoInitAttr('MDCTextField'))
+		input.mdc-text-field__input(type='text', id=ido)
+		label.mdc-floating-label(for=ido)= text
+		.mdc-line-ripple
+
+mixin mdc_tabs(ido, tabs)
+	.mdc-tab-bar(role='tablist', id='container-'+ido)
+		.mdc-tab-scroller
+			.mdc-tab-scroller__scroll-area
+				.mdc-tab-scroller__scroll-content
+					-
+						let active_cls_gen = fgen(name => [name], name => [name, name+'--active'])
+					each tab, index in tabs
+						- let active_cls = active_cls_gen();
+						button(class=active_cls('mdc-tab'), role='tab' aria-selected='true' tabindex=index)
+							span.mdc-tab__content
+								if tab.icon
+									+icon(tab.icon)
+								span.mdc-tab__text-label= tab.label
+							span(class=active_cls('mdc-tab-indicator'))
+								span.mdc-tab-indicator__content.mdc-tab-indicator__content--underline
+							span.mdc-tab__ripple
+
+//- Mostly for consistency sake
+mixin mdc_button(ido, text)
+	button.mdc-button(id='container-'+ido)= text
+mixin mdc_typography(ido, default_text)
+	.mdc-typography.mdc-typography--overline(id='container-'+ido)
+
+html
+	head
+		meta(charset='UTF-8')
+		title Heyo!
+
+		link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+		<!-- Required styles for MDC Web -->
+		link(rel='stylesheet', href='https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css')
+		<!-- Required MDC Web JavaScript library -->
+		script(type='text/javascript', src='https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js')
+
+	body
+		h6(class=['mdc-typography', 'mdc-typography--headline6', 'demo-headline']) MDC Web Quick Start
+		//- mdc_text_field('fname-text-field2', 'First2 Name')
+		+mdc_text_field('fname-text-field', 'First Name')
+		+mdc_text_field('lname-text-field', 'Last Name')
+		+mdc_button('greet-button', 'Greet')
+		+mdc_typography('greet-message', undefined)
+		//- button(class=['mdc-button', 'greet-button'], id='container-greet-button') Greet
+		//- div(class=['mdc-typography', 'mdc-typography--overline', 'greet-message'])
+		yo-whaddup-btn
+
+		// use Markdown for content, MDC for formatting? https://pugjs.org/language/filters.html
+
+		+mdc_tabs('osTabs', [
+			{
+				label: 'Windows',
+				icon: ['fab', 'windows'],
+			},
+			{
+				label: 'Linux/MacOS',
+				icon: ['fab', 'linux'],
+			}
+		])
+		
+		<!-- Render textfield component -->
+		+mdc_text_field('my-text-field', 'ahhhhh')
+
+		script(type='text/javascript', src='index.ts')

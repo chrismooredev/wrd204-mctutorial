@@ -1,0 +1,36 @@
+
+@import "@material/typography/mdc-typography";
+@import "@material/button/mdc-button";
+@import "@material/textfield/mdc-text-field";
+
+@import "@material/tab-bar/mdc-tab-bar";
+@import "@material/tab-scroller/mdc-tab-scroller";
+@import "@material/tab-indicator/mdc-tab-indicator";
+@import "@material/tab/mdc-tab";
+
+// font awesome
+//$fa-font-path: "@fortawesome/fontawesome-free/webfonts";
+@import "@fortawesome/fontawesome-free/css/all.css";
+//@import "@fortawesome/fontawesome-free/scss/solid";
+//@import "@fortawesome/fontawesome-free/scss/brands";
+
+html, body {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	margin-top: 48px;
+}
+
+.demo-headline {
+	margin-bottom: 32px;
+}
+
+.mdc-text-field {
+	margin-bottom: 24px;
+	flex-shrink: 0;
+}
+
+.greet-message {
+	margin-top: 48px; 
+}

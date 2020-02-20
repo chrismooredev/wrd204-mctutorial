@@ -1,0 +1,24 @@
+{
+  "name": "wrd204_mctutorial",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "pug/index.pug",
+  "scripts": {
+    "start": "node node_modules/parcel-bundler/bin/cli.js ./src/index.pug",
+    "build": "node node_modules/parcel-bundler/bin/cli.js build ./src/index.pug"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.1",
+    "parcel-bundler": "^1.12.4",
+    "pug-cli": "^1.0.0-alpha6",
+    "sass": "^1.25.0",
+    "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "@material/auto-init": "^5.0.0",
+    "material-components-web": "^5.0.0"
+  }
+}
