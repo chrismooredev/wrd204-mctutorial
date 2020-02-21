@@ -12110,52 +12110,6 @@ Object.defineProperty(exports, "__esModule", {
 require("./index.scss");
 
 require("@fortawesome/fontawesome-free/css/all.css");
-/*
-import { MDCTextField } from '@material/textfield';
-import { MDCRipple } from '@material/ripple';
-import { MDCTabBar } from '@material/tab-bar';
-//import MDCAutoInit from '@material/auto-init';
-
-//MDCAutoInit.register('MDCTextField', MDCTextField);
-
-//MDCAutoInit();
-
-// Essentially our 'page has loaded!' event
-//document.addEventListener('MDCAutoInit:End', () => {
-
-    // Initialize MDC Web components.
-    const greetButtonEl = document.getElementById('container-greet-button');
-    MDCRipple.attachTo(greetButtonEl);
-
-    const fnameTextfield = new MDCTextField(document.getElementById('container-fname-text-field'));
-    const lnameTextfield = new MDCTextField(document.getElementById('container-lname-text-field'));
-
-    // Custom javascript code.
-    const greetMessageEl = document.getElementById('container-greet-message');
-
-    greetButtonEl.addEventListener('click', () => {
-        let name;
-        if (fnameTextfield.value || lnameTextfield.value) {
-            name = fnameTextfield.value + ' ' + lnameTextfield.value;
-        } else {
-            name = 'Anonymous';
-        }
-        greetMessageEl.textContent = `Hello, ${name}!`;
-    });
-
-    // Instantiate single textfield component rendered in the document
-    new MDCTextField(document.getElementById('container-my-text-field'));
-
-    console.log("Hello, World!");
-    document.write("Hello, from TypeScript!");
-
-    const tabs = [
-
-    ]
-    const tabBar = new MDCTabBar(document.getElementById('container-osTabs'))
-//})
-*/
-
 
 require("@material/mwc-tab-bar");
 
@@ -12175,30 +12129,23 @@ btnGreet.addEventListener('click', function () {
 });
 var tabsChooseOS = document.getElementById('tabsChooseOS');
 tabsChooseOS.addEventListener('MDCTabBar:activated', function (ce) {
-  var index = ce.detail.index; // Note: 0 = windows, 1 = macos/linux
+  var index = ce.detail.index;
+  var tabIndicies = ['windows', 'unix'];
 
-  var enableWindows = false;
-  var enableUnix = false;
-
-  if (index === 0) {
-    enableWindows = true;
-  } else if (index === 1) {
-    enableUnix = true;
-  } else {
+  if (index >= tabIndicies.length) {
     throw new Error('Unknown OS tab index: ' + index);
   }
 
-  var clsWindows = Array.from(document.getElementsByClassName('windows'));
-  var clsUnix = Array.from(document.getElementsByClassName('unix'));
+  var target = tabIndicies[index]; // Put the targeted tab at the end of the array, to enable sections with multiple tab dignifiers
+  // (ex: div.windows and div.macos.linux) so the latter will be active if macos or linux is selected
 
-  var logic = function logic(enabled) {
-    return function (e) {
-      if (enabled) e.removeAttribute('hidden');else e.setAttribute('hidden', '');
-    };
-  };
+  tabIndicies.push(tabIndicies.splice(index, 1)[0]); // Since the targed tab is at the end, it should not be hidden by previous passes
 
-  clsWindows.forEach(logic(enableWindows));
-  clsUnix.forEach(logic(enableUnix));
+  tabIndicies.forEach(function (clsNme) {
+    return Array.from(document.getElementsByClassName(clsNme)).forEach(function (ele) {
+      if (clsNme === target) ele.removeAttribute('hidden');else ele.setAttribute('hidden', '');
+    });
+  });
 });
 },{"./index.scss":"index.scss","@fortawesome/fontawesome-free/css/all.css":"../node_modules/@fortawesome/fontawesome-free/css/all.css","@material/mwc-tab-bar":"../node_modules/@material/mwc-tab-bar/mwc-tab-bar.js","@material/mwc-tab":"../node_modules/@material/mwc-tab/mwc-tab.js","@material/mwc-button":"../node_modules/@material/mwc-button/mwc-button.js","@material/mwc-textfield":"../node_modules/@material/mwc-textfield/mwc-textfield.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -12228,7 +12175,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58483" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57763" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
