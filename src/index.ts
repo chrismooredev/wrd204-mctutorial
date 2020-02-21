@@ -1,56 +1,11 @@
 
 import './index.scss';
 import '@fortawesome/fontawesome-free/css/all.css';
-/*
-import { MDCTextField } from '@material/textfield';
-import { MDCRipple } from '@material/ripple';
-import { MDCTabBar } from '@material/tab-bar';
-//import MDCAutoInit from '@material/auto-init';
-
-//MDCAutoInit.register('MDCTextField', MDCTextField);
-
-//MDCAutoInit();
-
-// Essentially our 'page has loaded!' event
-//document.addEventListener('MDCAutoInit:End', () => {
-
-	// Initialize MDC Web components.
-	const greetButtonEl = document.getElementById('container-greet-button');
-	MDCRipple.attachTo(greetButtonEl);
-
-	const fnameTextfield = new MDCTextField(document.getElementById('container-fname-text-field'));
-	const lnameTextfield = new MDCTextField(document.getElementById('container-lname-text-field'));
-
-	// Custom javascript code.
-	const greetMessageEl = document.getElementById('container-greet-message');
-
-	greetButtonEl.addEventListener('click', () => {
-		let name;
-		if (fnameTextfield.value || lnameTextfield.value) {
-			name = fnameTextfield.value + ' ' + lnameTextfield.value;
-		} else {
-			name = 'Anonymous';
-		}
-		greetMessageEl.textContent = `Hello, ${name}!`;
-	});
-
-	// Instantiate single textfield component rendered in the document
-	new MDCTextField(document.getElementById('container-my-text-field'));
-
-	console.log("Hello, World!");
-	document.write("Hello, from TypeScript!");
-
-	const tabs = [
-
-	]
-	const tabBar = new MDCTabBar(document.getElementById('container-osTabs'))
-//})
-*/
-
 import '@material/mwc-tab-bar'
 import '@material/mwc-tab'
 import '@material/mwc-button'
 import '@material/mwc-textfield'
+
 //import '@material/mwc-typography'
 import { TextField as MDCTextField } from '@material/mwc-textfield';
 import { TabBar as MDCTabBar } from '@material/mwc-tab-bar';
@@ -69,26 +24,22 @@ const tabsChooseOS = document.getElementById('tabsChooseOS') as MDCTabBar;
 tabsChooseOS.addEventListener('MDCTabBar:activated', (ce: CustomEvent) => {
 	const index = ce.detail.index;
 	
-	// Note: 0 = windows, 1 = macos/linux
-	let enableWindows = false;
-	let enableUnix = false;
-	if(index === 0) {
-		enableWindows = true;
-	} else if(index === 1) {
-		enableUnix = true;
-	} else {
+	const tabIndicies = ['windows', 'unix'];
+	if(index >= tabIndicies.length) {
 		throw new Error('Unknown OS tab index: ' + index);
 	}
-	
-	let clsWindows = Array.from(document.getElementsByClassName('windows'));
-	let clsUnix = Array.from(document.getElementsByClassName('unix'));
+	const target = tabIndicies[index];
 
-	let logic = enabled =>
-		e => {
-			if(enabled) e.removeAttribute('hidden');
-			else e.setAttribute('hidden', '');
-		}
+	// Put the targeted tab at the end of the array, to enable sections with multiple tab dignifiers
+	// (ex: div.windows and div.macos.linux) so the latter will be active if macos or linux is selected
+	tabIndicies.push(tabIndicies.splice(index, 1)[0]);
 
-	clsWindows.forEach(logic(enableWindows));
-	clsUnix.forEach(logic(enableUnix));
+	// Since the targed tab is at the end, it should not be hidden by previous passes
+	tabIndicies.forEach(clsNme =>
+		Array.from(document.getElementsByClassName(clsNme))
+			.forEach(ele => {
+				if(clsNme === target) ele.removeAttribute('hidden');
+				else ele.setAttribute('hidden', '');
+			})
+	)
 });
