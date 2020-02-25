@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "jstransformer-markdown-it": "^2.1.0",
     "parcel-bundler": "^1.12.4",
     "pug-cli": "^1.0.0-alpha6",
     "sass": "^1.25.0",
@@ -20,10 +21,12 @@
     "@fortawesome/fontawesome-free": "^5.12.1",
     "@material/auto-init": "^5.0.0",
     "@material/mwc-button": "^0.13.0",
+    "@material/mwc-icon": "^0.13.0",
     "@material/mwc-tab": "^0.13.0",
     "@material/mwc-tab-bar": "^0.13.0",
     "@material/mwc-textfield": "^0.13.0",
     "@webcomponents/webcomponentsjs": "^2.4.1",
+    "highlight.js": "^9.18.1",
     "material-components-web": "^5.0.0"
   }
 }

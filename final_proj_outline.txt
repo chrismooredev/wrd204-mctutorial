@@ -1,0 +1,33 @@
+
+prototype: setup a mc server
+	go over:
+		* who this guide is for/expected knowledge or materials
+		* why you want to do it yourself, why you should have it hosted
+		* should have a server already
+		* install java (windows/linux)
+		* get server running
+			eula
+			common server.properties changes
+				seed/ports/etc
+			mods? pros/cons
+				resource utilization
+				hosting bandwidth
+				updating modpack vs vanilla
+			world maintenance
+				backing up
+				delete
+		* subsection for port forwarding, if necessary
+		* create domain(s?) w/ Google Domains
+		* ports: apartment/mailbox number | addresses: apartment address
+	troubleshooting:
+		domain doesn't work: wait longer, double check the addresses/ports
+		game doesn't break blocks immediatly: network or resource bottleneck
+		game's screen jumps around/FPS isn't stable: clientside problem, server is probably fine
+		only OPs can change blocks near spawn: server.properties
+		can't connect to IP:
+			if hosting on own machine: does localhost work?
+				NAT: you may have to use a different address than the one others use
+			if hosting on other machine: can you ping it?
+		failed to bind to port: other servers using the same port?
+			check for general connectivity
+

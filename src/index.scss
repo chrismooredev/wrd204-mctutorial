@@ -14,15 +14,18 @@
 //@import "@fortawesome/fontawesome-free/scss/solid";
 //@import "@fortawesome/fontawesome-free/scss/brands";
 
+//@import "./style.css";
+@import "./style_mcgrassblock.css";
+
 /** palette.sass */
-$primary-color-dark:   #388E3C;
+/*$primary-color-dark:   #388E3C;
 $primary-color:        #4CAF50;
 $primary-color-light:  #C8E6C9;
 $primary-color-text:   #FFFFFF;
 $accent-color:         #795548;
 $primary-text-color:   #212121;
 $secondary-text-color: #757575;
-$divider-color:        #BDBDBD;
+$divider-color:        #BDBDBD;*/
 
 /* Styling */
 html, body {
@@ -31,12 +34,29 @@ html, body {
 	justify-content: flex-start;
 	align-items: center;
 	margin-top: 48px;
-	color: #cccccc;
-	background-color: #444444;
-	--mdc-theme-primary: #{$primary-color};
-	--mdc-theme-secondary: #{$accent-color};
-	--mdc-secondary-text-color: #{$secondary-text-color};
-	--mdc-tab-color-default: #{$accent-color};
+	//color: #cccccc;
+	//background-color: #2e2e2e;
+	//color: var(--mdc-theme-background);
+	color: #afafaf;
+	background-color: var(--mdc-theme-background);
+	font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
+	
+	// --mdc-theme-primary: #{$primary-color};
+	// --mdc-theme-secondary: #{$accent-color};
+	// --mdc-secondary-text-color: #{$secondary-text-color};
+	// --mdc-tab-color-default: #{$accent-color};
+}
+
+// Soften the link colors to look alright okay with the charcoalish background
+a {
+	color: #5d5dff;
+}
+a:visited {
+	color: rgb(134, 80, 134);
+}
+
+[class^="language-"] {
+	font-family: "Courier New", Courier, monospace;
 }
 
 mwc-textfield {
@@ -45,18 +65,38 @@ mwc-textfield {
 mwc-button {
 	margin: 8px;
 }
+mwc-icon.fontawesome-brands {
+	font-family: "fab";
+}
+mwc-icon.fab {
+	--mdc-icon-font: 'fab';
+}
+
+.section {
+	margin: 8px;
+}
 
 .demo-headline {
 	margin-bottom: 32px;
 }
 
-.mdc-text-field {
-	margin-bottom: 24px;
-	flex-shrink: 0;
+.warning {
+	background-color: #ffff53;
+	color: #000;
+	//padding: 8px;
+	border: solid #ffa700;
+	border-radius: 8px;
+	font-size: 1em;
+	vertical-align: baseline;
+	display: inline-block;
+	margin: 4px;
 }
-
-.greet-message {
-	margin-top: 48px; 
+.warning-title {
+	margin: 4px;
+}
+.warning * {
+	margin: 4px;
+	//display: inline-block;
 }
 
 // not reflected in current palette.sass

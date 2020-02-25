@@ -12,58 +12,50 @@
 		}
 	}
 
-mixin icon(icondesc)
-	-
-		let classes, content;
-		switch(icondesc[0]) {
-			case 'material-icons':
-				classes = ['']
-			case 'fas':
-			case 'fab':
-				icondesc[1] = 'fa-'+icondesc[1];
-				classes = icondesc
-		}
-	
-	
-	case icondesc[0]
-		when 'material-icons'
-			span(aria-hidden='true', class=['mdc-tab__icon', icondesc[0]])= icondesc[1]
+mixin icon(name, brand='Material Icons')
+	case brand
+		when 'Material Icons'
+			.icon= name
 		when 'fas'
 		when 'fab'
-			- icondesc[1] = 'fa-' + icondesc[1]
-			span(aria-hidden='true', class=icondesc)
+			.icon(class=[brand, 'fa-'+name])
 		default
-			- throw new Error('Unknown tab icon type: ' + icondesc[0]);
+			- throw new Error(`Unknown icon provider: '${brand}' (requested for icon ${name})`)
 
-mixin mdc_text_field(ido, text)
-	.mdc-text-field(id='container-'+ido)&attributes(AutoInitAttr('MDCTextField'))
-		input.mdc-text-field__input(type='text', id=ido)
-		label.mdc-floating-label(for=ido)= text
-		.mdc-line-ripple
+mixin warning(title)
+	//- If a title is supplied, put it bolded inline with an icon
+	//- Otherwise, keep the icon on its own column
+	div.warning(style='display: inline-block;')
+		//- Icon and content should be on seperate columns
+		mwc-icon(style='display: inline-block; vertical-align: top;') warning
+		div(style='display: inline-block; vertical-align: top;')
+			//- Title (if applicable) and block should be on seperate rows
+			if title 
+				h3.warning-title= title
+			div
+				block
 
-mixin mdc_tabs(ido, tabs)
-	.mdc-tab-bar(role='tablist', id='container-'+ido)
-		.mdc-tab-scroller
-			.mdc-tab-scroller__scroll-area
-				.mdc-tab-scroller__scroll-content
-					-
-						let active_cls_gen = fgen(name => [name], name => [name, name+'--active'])
-					each tab, index in tabs
-						- let active_cls = active_cls_gen();
-						button(class=active_cls('mdc-tab'), role='tab' aria-selected='true' tabindex=index)
-							span.mdc-tab__content
-								if tab.icon
-									+icon(tab.icon)
-								span.mdc-tab__text-label= tab.label
-							span(class=active_cls('mdc-tab-indicator'))
-								span.mdc-tab-indicator__content.mdc-tab-indicator__content--underline
-							span.mdc-tab__ripple
+mixin warning_tbl(title, icon)
+	table.warning
+		tr
+			td: mwc-icon= icon || 'warning'
+			td
+				if title
+					h3.warning-title= title
+				else
+					div: block
+		if title
+			tr
+				td
+				td: div
+					block
+		
+
 
 //- Mostly for consistency sake
-mixin mdc_button(ido, text)
-	button.mdc-button(id='container-'+ido)= text
-mixin mdc_typography(ido, default_text)
-	.mdc-typography.mdc-typography--overline(id='container-'+ido)
+mixin mdc-typography(ido, default_text)
+	.mdc-typography.mdc-typography--overline(id=ido ? 'container-'+ido : undefined)
+		block
 
 - const iconDescriptor = (font, name) => ({ hasImageIcon: true, icon })
 
@@ -72,52 +64,68 @@ html
 		meta(charset='UTF-8')
 		title Heyo! (feat. Web Components!)
 
+
+		link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500")
+		link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons&display=block")
+		link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,700&display=swap')
+
+		link(rel='stylesheet' href='https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css')
+		script(type='text/javascript' src='https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js')
+		
 		script(type='text/javascript', src='../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js')
-		link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Roboto:300,400,500")
-		link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Material+Icons&display=block")
-		
-
-		link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
-		<!-- Required styles for MDC Web -->
-		link(rel='stylesheet', href='https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css')
-		<!-- Required MDC Web JavaScript library -->
-		script(type='text/javascript', src='https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js')
-
 	body
-		h6.mdc-typography.mdc-typography--headline6.demo-headline MDC Web Quick Start
-		mwc-textfield(id='nameFirst', label='First Name')
-		mwc-textfield(id='nameLast', label='Last Name')
-		mwc-button(id='btnGreet' label='Greet Me!' raised)
-		#txtGreet
+		+mdc-typography('') How 2 Install a Minecraft Server
+		h6.mdc-typography.mdc-typography--headline6.demo-headline
+			| How to Install a Minecraft Server
+		//- mwc-textfield(id='nameFirst', label='First Name')
+		//- mwc-textfield(id='nameLast', label='Last Name')
+		//- mwc-button(id='btnGreet' label='Greet Me!' raised)
+		//- #txtGreet
 		
-		span
+		// Choose OS for instructions
+		.section
 			span I would prefer instructions for...
-			mwc-tab-bar#tabsChooseOS
+			mwc-tab-bar#tabsChooseOS(style='color: rgba(255, 255, 255, 0.2)')
 				mwc-tab(label='Windows' hasImageIcon)
-				mwc-tab(label='macOS/Linux' hasImageIcon)
-		// tab bar content here, with dynamic content switching?
-		.dependant_on_tabs
-			.windows
-				div Windows Instructions! :D
-			.unix(hidden)
-				div Unix Instructions! :D
+					+icon('windows', 'fab')
+				mwc-tab(label='macOS' hasImageIcon)
+					+icon('apple', 'fab')
+				mwc-tab(label='Linux' hasImageIcon)
+					+icon('linux', 'fab')
+		
+		+warning_tbl("Don't mess up (w/ title)")
+			| Titled ya doofus
+		+warning_tbl
+			| Untitled doofus
+		
+		//- Install Java
+			//- Good Reference
+			//- https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-debian-10
+		#install-java.section
+			.section
+				| Historically, the standard Oracle Java did not require a login to download. They have changed this to require one. I recommend using Oracle Java if you do not mind creating a new account. OpenJDK does not require creating a new account, however it may be more difficult to install.
+			.windows(class='"Material Icons"')
+				| Go to 
+				include:markdown-it(langPrefix='language-') install_java_win.md
+			.macos.linux(hidden)
+				// linux https://docs.oracle.com/javase/8/docs/technotes/guides/install/linux_jre.html
+				:markdown-it(langPrefix='language-')
+					### Markdown (Inline)
+					If you are using Debian/Ubuntu Server (If you are using linux, but aren't sure, you probably are), you can use this simple command to install Java
+					> :warning: ohh
+					```bash
+					$ sudo apt-get install openjdk-8-jre-headless
+					```
+					
+					have fun!
+		// Install Server
+		//		Get latest from https://www.minecraft.net/en-us/download/server/
+		// Run Server
+		// Port forwarding?
+		//		A port => similar to apt number
+		// Create domain w/ Google Domains
+		// Troubleshooting
 
 		h6.mdc-typography.mdc-typography--headline6.demo-headline MDC Web Quick Start
-
-		// use Markdown for content, MDC for formatting? https://pugjs.org/language/filters.html
-
-		+mdc_tabs('osTabs', [
-			{
-				label: 'Windows',
-				icon: ['fab', 'windows'],
-			},
-			{
-				label: 'Linux/MacOS',
-				icon: ['fab', 'linux'],
-			}
-		])
-		
-		<!-- Render textfield component -->
-		+mdc_text_field('my-text-field', 'ahhhhh')
 
 		script(type='text/javascript', src='index.ts')
