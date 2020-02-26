@@ -15,42 +15,30 @@
 mixin icon(name, brand='Material Icons')
 	case brand
 		when 'Material Icons'
-			.icon= name
+			mwc-icon.icon= name
 		when 'fas'
 		when 'fab'
 			.icon(class=[brand, 'fa-'+name])
 		default
 			- throw new Error(`Unknown icon provider: '${brand}' (requested for icon ${name})`)
 
-mixin warning(title)
-	//- If a title is supplied, put it bolded inline with an icon
-	//- Otherwise, keep the icon on its own column
-	div.warning(style='display: inline-block;')
-		//- Icon and content should be on seperate columns
-		mwc-icon(style='display: inline-block; vertical-align: top;') warning
-		div(style='display: inline-block; vertical-align: top;')
-			//- Title (if applicable) and block should be on seperate rows
-			if title 
-				h3.warning-title= title
-			div
-				block
-
-mixin warning_tbl(title, icon)
-	table.warning
+mixin note(type, title, icon_brand)
+	-
+		if(type === undefined) { type = 'info'; }
+		const partcls = part => `note-${part}-${type}`;
+	table(class=partcls('container'))
 		tr
-			td: mwc-icon= icon || 'warning'
+			td: div(class=partcls('icon')): +icon(type, icon_brand)
 			td
 				if title
-					h3.warning-title= title
+					h3(class=partcls('title'))= title
 				else
-					div: block
+					div(class=partcls('body')): block
 		if title
 			tr
 				td
-				td: div
+				td: div(class=partcls('body'))
 					block
-		
-
 
 //- Mostly for consistency sake
 mixin mdc-typography(ido, default_text)
@@ -92,11 +80,20 @@ html
 					+icon('apple', 'fab')
 				mwc-tab(label='Linux' hasImageIcon)
 					+icon('linux', 'fab')
+				mwc-tab(label='MatIcon Test' hasImageIcon)
+					+icon('warning')
 		
-		+warning_tbl("Don't mess up (w/ title)")
+		+note('warning', "Don't mess up (w/ title)")
 			| Titled ya doofus
-		+warning_tbl
+		+note
 			| Untitled doofus
+		+note('info', "Don't forget!")
+			| heyo
+		+note('warning', 'Not able to break blocks near spawn?')
+			:markdown-it()
+				Having ANY Operators (OPs) on the server, enables world protections near spawn.
+				If you want non-OP'd players to edit the world, you can remove all the OPs of the server,
+				or set `spawn-protection` to 0 in the [server.properties file](https://minecraft.gamepedia.com/Server.properties).
 		
 		//- Install Java
 			//- Good Reference

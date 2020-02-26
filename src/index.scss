@@ -80,23 +80,42 @@ mwc-icon.fab {
 	margin-bottom: 32px;
 }
 
-.warning {
-	background-color: #ffff53;
-	color: #000;
-	//padding: 8px;
-	border: solid #ffa700;
+[class^="note-container-"] {
 	border-radius: 8px;
 	font-size: 1em;
 	vertical-align: baseline;
 	display: inline-block;
 	margin: 4px;
+	//padding: 8px;
+	color: #000;
+
+	[class^="note-"] {
+		margin: 2px;
+	}
+	[class^="note-title-"] {
+		// No margin top/bottom, 4px sides
+		margin: 0px 4px; // Required as header elements specify custom top/bottom margins
+		//margin-left: 0px; // So the title aligns with the text;
+	}
+	[class^="note-body-"] {
+		//margin: 0px;
+		margin: 0px 4px;
+	}
 }
-.warning-title {
-	margin: 4px;
+
+// Provide eye-catching 'defaults' for uncolored notes
+[class^="note-container-"] {
+	background-color: red;
+	border: solid blue;
 }
-.warning * {
-	margin: 4px;
-	//display: inline-block;
+.note-container-warning {
+	background-color: #ffff53;
+	border: solid #ffa700;
+}
+.note-container-info {
+	background-color: #1200a9;
+    border: solid #b1b1ff;
+    color: lightgray;
 }
 
 // not reflected in current palette.sass
