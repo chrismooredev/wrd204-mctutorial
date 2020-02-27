@@ -7106,16 +7106,29 @@ $accent-color:         #795548;
 $primary-text-color:   #212121;
 $secondary-text-color: #757575;
 $divider-color:        #BDBDBD;*/
+:root {
+  --mdc-tab-text-label-color-default: #000000;
+}
+
 /* Styling */
-html, body {
+html {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  /* size of rem unit */
+}
+
+body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 48px;
+  margin-top: 2rem;
   color: #afafaf;
   background-color: var(--mdc-theme-background);
   font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
+  max-width: 800px;
 }
 
 a {
@@ -7128,6 +7141,15 @@ a:visited {
 
 [class^=language-] {
   font-family: "Courier New", Courier, monospace;
+}
+
+code {
+  background-color: #3f3f3f;
+  border-radius: 4px;
+  border: 1px solid #6d6d6d;
+  padding: 0.05em 0.25em;
+  color: #dcdcdc;
+  font-size: 0.9em;
 }
 
 mwc-textfield {
@@ -7146,6 +7168,12 @@ mwc-icon.fab {
   --mdc-icon-font: "fab";
 }
 
+.mdc-divider {
+  border: none;
+  border-top: 1px solid #ffffff80;
+  width: 85%;
+}
+
 .section {
   margin: 8px;
 }
@@ -7160,10 +7188,26 @@ mwc-icon.fab {
   vertical-align: baseline;
   display: inline-block;
   margin: 4px;
-  color: #000;
+  min-width: 400px;
+  max-width: 600px;
+  background-color: red;
+  border: solid blue;
 }
 [class^=note-container-] [class^=note-] {
   margin: 2px;
+}
+[class^=note-container-] [class^=note-icon-] {
+  vertical-align: top;
+  font-size: 1.5rem;
+}
+[class^=note-container-] [class^=note-icon-] > .fab.fa-windows {
+  color: #8282f3;
+}
+[class^=note-container-] [class^=note-icon-] > .fab.fa-apple {
+  color: white;
+}
+[class^=note-container-] [class^=note-icon-] > .fab.fa-ubuntu {
+  color: orange;
 }
 [class^=note-container-] [class^=note-title-] {
   margin: 0px 4px;
@@ -7172,20 +7216,67 @@ mwc-icon.fab {
   margin: 0px 4px;
 }
 
-[class^=note-container-] {
-  background-color: red;
-  border: solid blue;
-}
-
 .note-container-warning {
   background-color: #ffff53;
   border: solid #ffa700;
+  color: black;
 }
 
 .note-container-info {
-  background-color: #1200a9;
-  border: solid #b1b1ff;
-  color: lightgray;
+  background-color: #6655ff;
+  border: solid #1414b5;
+  color: black;
+}
+
+.note-container-ossection {
+  background-color: #ffffff12;
+  border: solid #868686;
+  color: white;
+}
+.note-container-ossection tr > td {
+  padding: 4px;
+}
+.note-container-ossection tr > td:nth-child(1) {
+  vertical-align: top;
+  font-size: 1.5rem;
+}
+.note-container-ossection tr > td:nth-child(1) > .fab.fa-windows {
+  color: #8282f3;
+}
+.note-container-ossection tr > td:nth-child(1) > .fab.fa-apple {
+  color: white;
+}
+
+.fab.fa-windows {
+  margin: 2px;
+}
+
+.fab.fa-apple {
+  margin: 2px;
+}
+
+.fab.fa-ubuntu {
+  margin: 2px;
+}
+
+#requirements table {
+  border-collapse: collapse;
+}
+#requirements table tr > * {
+  border: 1px solid #868686;
+  padding: 4px;
+  text-align: center;
+}
+
+.key {
+  background-color: #ffffffe0;
+  color: #000000;
+  border-radius: 2px;
+  padding: 2px 2px;
+  border: 1px solid #797979;
+  box-shadow: 1px 2px 0px 0px #797979;
+  font-size: 0.9em;
+  margin: 2px 2px;
 }
 /*
 
