@@ -15,10 +15,11 @@ hljs.initHighlightingOnLoad();
 import { TabBar as MDCTabBar } from '@material/mwc-tab-bar';
 
 // Note: The values of the enum (as in, not the keys, are classes used to display each type of OS instructions)
+// Ensure is synced with .pug and .scss
 enum OSType {
 	Windows = 'windows',
-	macOS = 'macos',
-	Linux = 'linux',
+	macOS = 'apple',
+	Linux = 'ubuntu',
 }
 const DEFAULT_OS = OSType.Windows;
 

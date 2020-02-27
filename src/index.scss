@@ -27,20 +27,41 @@ $primary-text-color:   #212121;
 $secondary-text-color: #757575;
 $divider-color:        #BDBDBD;*/
 
+// ensure is synced with .pug and .ts
+$linux: 'ubuntu';
+$windows: 'windows';
+$macos: 'apple';
+
+$pageWidth: 800px;
+$gray: #868686;
+
+:root {
+	--mdc-tab-text-label-color-default: #000000;
+}
+
 /* Styling */
-html, body {
+html {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	font-size: 18px; /* size of rem unit */
+}
+body {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
-	margin-top: 48px;
+	margin-top: 2rem;
 	//color: #cccccc;
 	//background-color: #2e2e2e;
 	//color: var(--mdc-theme-background);
 	color: #afafaf;
 	background-color: var(--mdc-theme-background);
 	font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif;
-	
+
+	max-width: $pageWidth;
+
 	// --mdc-theme-primary: #{$primary-color};
 	// --mdc-theme-secondary: #{$accent-color};
 	// --mdc-secondary-text-color: #{$secondary-text-color};
@@ -58,6 +79,14 @@ a:visited {
 [class^="language-"] {
 	font-family: "Courier New", Courier, monospace;
 }
+code {
+	background-color: #3f3f3f;
+	border-radius: 4px;
+	border: 1px solid #6d6d6d;
+	padding: 0.05em 0.25em;
+	color: #dcdcdc;
+	font-size: 0.9em;
+}
 
 mwc-textfield {
 	margin: 8px;
@@ -71,6 +100,12 @@ mwc-icon.fontawesome-brands {
 mwc-icon.fab {
 	--mdc-icon-font: 'fab';
 }
+.mdc-divider {
+	border: none;
+	border-top: 1px solid #ffffff80;
+	width: 85%;
+	//margin: 2rem;
+}
 
 .section {
 	margin: 8px;
@@ -82,15 +117,34 @@ mwc-icon.fab {
 
 [class^="note-container-"] {
 	border-radius: 8px;
-	font-size: 1em;
+	font-size: 1em; // no-op? 1em = 1 of 'font-size' of parent
 	vertical-align: baseline;
 	display: inline-block;
 	margin: 4px;
-	//padding: 8px;
-	color: #000;
+	min-width: $pageWidth / 2;
+	max-width: $pageWidth - 200;
 
-	[class^="note-"] {
+	// Provide eye-catching 'defaults' for uncolored notes
+	background-color: red;
+	border: solid blue;
+
+	[class^="note-"] { // icon, title, body
 		margin: 2px;
+	}
+	[class^="note-icon-"] {
+		vertical-align: top;
+		font-size: 1.5rem;
+
+		> .fab.fa-#{$windows} {
+			color: #8282f3;
+		}
+		> .fab.fa-#{$macos} {
+			color: white;
+		}
+		> .fab.fa-#{$linux} {
+			color: orange;
+		}
+		
 	}
 	[class^="note-title-"] {
 		// No margin top/bottom, 4px sides
@@ -103,21 +157,72 @@ mwc-icon.fab {
 	}
 }
 
-// Provide eye-catching 'defaults' for uncolored notes
-[class^="note-container-"] {
-	background-color: red;
-	border: solid blue;
-}
 .note-container-warning {
 	background-color: #ffff53;
 	border: solid #ffa700;
+	color: black;
 }
 .note-container-info {
-	background-color: #1200a9;
-    border: solid #b1b1ff;
-    color: lightgray;
+	background-color: #6655ff;
+	border: solid #1414b5;
+	color: black;
+}
+.note-container-ossection {
+	//border-radius: 2px;
+	background-color: #ffffff12;
+	border: solid $gray;
+	color: white;
+
+	tr > td {
+		padding: 4px;
+	
+		&:nth-child(1) { // Only affect the icon
+			vertical-align: top;
+			font-size: 1.5rem;
+		
+			> .fab.fa-#{$windows} {
+				color: #8282f3;
+			}
+			> .fab.fa-#{$macos} {
+				color: white;
+			}
+		}
+	}
+}
+.fab.fa-#{$windows} {
+	margin: 2px;
+}
+.fab.fa-#{$macos} {
+	margin: 2px;
+}
+.fab.fa-#{$linux} {
+	margin: 2px;
 }
 
 // not reflected in current palette.sass
 //primary - green - 4caf50
 //secondary - brown - 8d6e63
+
+#requirements table {
+	border-collapse: collapse;
+
+	tr > * { // includes th and td for header and data cells
+		border: 1px solid $gray;
+		padding: 4px;
+		text-align: center;
+	}
+}
+
+// key on a keyboard
+.key {
+	background-color: #ffffffe0;
+	color: #000000;
+	border-radius: 2px;
+	padding: 2px 2px;
+	border: 1px solid #797979;
+	box-shadow: 1px 2px 0px 0px #797979;
+	font-size: 0.9em;
+	margin: 2px 2px;
+}
+
+

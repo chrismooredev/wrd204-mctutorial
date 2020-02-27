@@ -12,6 +12,13 @@
 		}
 	}
 
+	// ensure is synced with .scss and .ts
+	const os = {
+		linux: 'ubuntu',
+		windows: 'windows',
+		macos: 'apple',
+	}
+
 mixin icon(name, brand='Material Icons')
 	case brand
 		when 'Material Icons'
@@ -22,28 +29,82 @@ mixin icon(name, brand='Material Icons')
 		default
 			- throw new Error(`Unknown icon provider: '${brand}' (requested for icon ${name})`)
 
-mixin note(type, title, icon_brand)
+//mixin note(type, title, ido, icon_brand)
+mixin note(opts)
 	-
-		if(type === undefined) { type = 'info'; }
-		const partcls = part => `note-${part}-${type}`;
-	table(class=partcls('container'))
-		tr
-			td: div(class=partcls('icon')): +icon(type, icon_brand)
-			td
-				if title
-					h3(class=partcls('title'))= title
-				else
-					div(class=partcls('body')): block
+		// opts: { type: class, title?: string, id?: string, icon? = type, icon_brand? = string}
+		opts = opts || {}
+		const icon_desc = [opts.icon || opts.type, opts.icon_brand];
+		console.assert(opts.type);
+		const partcls = part => `note-${part}-${opts.type || 'info'}`;
+	table(class=partcls('container'), id=opts.id)
 		if title
 			tr
+				td(class=partcls('icon')): +icon(...icon_desc)
+				td: h3(class=partcls('title'))= title
+			tr
 				td
-				td: div(class=partcls('body'))
-					block
+				td: div(class=partcls('body')): block
+		else
+			tr
+				td(class=partcls('icon')): +icon(...icon_desc)
+				td: div(class=partcls('body')): block
 
 //- Mostly for consistency sake
-mixin mdc-typography(ido, default_text)
-	.mdc-typography.mdc-typography--overline(id=ido ? 'container-'+ido : undefined)
-		block
+mixin mdc-typography(style, ido)
+	case style
+		when 'headline1'
+		when 'headline2'
+		when 'headline3'
+		when 'headline4'
+		when 'headline5'
+		when 'headline6'
+		when 'subtitle1'
+		when 'subtitle2'
+		when 'body1'
+		when 'body2'
+		when 'caption'
+		when 'button'
+		when 'overline'
+			.mdc-typography(class='mdc-typography--'+style, id=ido ? 'container-'+ido : undefined)
+				block
+		default
+			- throw new Error('Illegal typography style: ' + style);
+mixin mdc-divider()
+	hr.mdc-divider
+
+mixin keycombo(keyarr)
+	for k,i in keyarr
+		case k
+			when 'Win'
+				span.key.icon.fab.fa-windows
+			default
+				span.key= k
+		if i !== keyarr.length-1
+			span +
+
+mixin ossection(os)
+	if typeof os === 'string'
+		+note({
+			type: 'ossection',
+			icon: os, icon_brand: 'fab',
+		})
+			block
+	else
+		for o in os
+			+note(o)
+				block
+	//-
+		if typeof os === 'string'
+			table.ossection(class=os)
+				tr
+					td: +icon(os, 'fab')
+					td
+						block
+		else
+			for o in os /* it was an array, duplicate its contents */
+				+ossection(o)
+					block
 
 - const iconDescriptor = (font, name) => ({ hasImageIcon: true, icon })
 
@@ -51,7 +112,6 @@ html
 	head
 		meta(charset='UTF-8')
 		title Heyo! (feat. Web Components!)
-
 
 		link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500")
 		link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons&display=block")
@@ -62,67 +122,94 @@ html
 		
 		script(type='text/javascript', src='../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js')
 	body
-		+mdc-typography('') How 2 Install a Minecraft Server
-		h6.mdc-typography.mdc-typography--headline6.demo-headline
-			| How to Install a Minecraft Server
+		#header.section
+			mwc-tab-bar#tabsChooseOS(style='color: rgba(255, 255, 255, 0.2)')
+				mwc-tab(label='Windows 10' hasImageIcon)
+					+icon(os.windows, 'fab')
+				mwc-tab(label='macOS' hasImageIcon)
+					+icon(os.macos, 'fab')
+				mwc-tab(label='Linux' hasImageIcon)
+					+icon(os.linux, 'fab')
+			+mdc-typography('headline4') How to: Install a Minecraft Server
+			//.section
+
+		+mdc-divider()
+		
 		//- mwc-textfield(id='nameFirst', label='First Name')
 		//- mwc-textfield(id='nameLast', label='Last Name')
 		//- mwc-button(id='btnGreet' label='Greet Me!' raised)
 		//- #txtGreet
 		
 		// Choose OS for instructions
-		.section
-			span I would prefer instructions for...
-			mwc-tab-bar#tabsChooseOS(style='color: rgba(255, 255, 255, 0.2)')
-				mwc-tab(label='Windows' hasImageIcon)
-					+icon('windows', 'fab')
-				mwc-tab(label='macOS' hasImageIcon)
-					+icon('apple', 'fab')
-				mwc-tab(label='Linux' hasImageIcon)
-					+icon('linux', 'fab')
-				mwc-tab(label='MatIcon Test' hasImageIcon)
-					+icon('warning')
-		
-		+note('warning', "Don't mess up (w/ title)")
+
+		//-
+		+note({type: 'warning', title: "Don't mess up (w/ title)"})
 			| Titled ya doofus
 		+note
 			| Untitled doofus
-		+note('info', "Don't forget!")
+		+note({type: 'info', title: "Don't forget!"})
 			| heyo
-		+note('warning', 'Not able to break blocks near spawn?')
-			:markdown-it()
-				Having ANY Operators (OPs) on the server, enables world protections near spawn.
-				If you want non-OP'd players to edit the world, you can remove all the OPs of the server,
-				or set `spawn-protection` to 0 in the [server.properties file](https://minecraft.gamepedia.com/Server.properties).
+		
 		
 		//- Install Java
 			//- Good Reference
 			//- https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-debian-10
-		#install-java.section
-			.section
+		//
+			#install-java.section
 				| Historically, the standard Oracle Java did not require a login to download. They have changed this to require one. I recommend using Oracle Java if you do not mind creating a new account. OpenJDK does not require creating a new account, however it may be more difficult to install.
-			.windows(class='"Material Icons"')
-				| Go to 
-				include:markdown-it(langPrefix='language-') install_java_win.md
-			.macos.linux(hidden)
-				// linux https://docs.oracle.com/javase/8/docs/technotes/guides/install/linux_jre.html
-				:markdown-it(langPrefix='language-')
-					### Markdown (Inline)
-					If you are using Debian/Ubuntu Server (If you are using linux, but aren't sure, you probably are), you can use this simple command to install Java
-					> :warning: ohh
-					```bash
-					$ sudo apt-get install openjdk-8-jre-headless
-					```
-					
-					have fun!
+				.windows(class='"Material Icons"')
+					| Go to 
+					include:markdown-it(langPrefix='language-') install_java_win.md
+				.macos.linux(hidden)
+					// linux https://docs.oracle.com/javase/8/docs/technotes/guides/install/linux_jre.html
+					:markdown-it(langPrefix='language-')
+						### Markdown (Inline)
+						If you are using Debian/Ubuntu Server (If you are using linux, but aren't sure, you probably are), you can use this simple command to install Java
+						> :warning: ohh
+						```bash
+						$ sudo apt-get install openjdk-8-jre-headless
+						```
+						
+						have fun!
+
+		#requirements.section
+			:markdown-it(html)
+				## Requirements
+				A server with the following number of players should have the following amount of spare RAM and storage:
+				| Players | RAM  | Storage  |
+				|---------|------|----------|
+				| 1-5     | 3 GB | 10-20 GB |
+				| 5-10    | 6 GB | 20-30 GB |
+				| 10+     | 8 GB | 30+ GB   |
+				*Storage space will be dependant on how much your players explore the world.*
+
+		+mdc-divider()
+
 		// Install Server
+		#install-server.section
+			:markdown-it(html)
+				1. Create a new folder on your computer to put the server files
+					* For this tutorial, this folder will be called `mcserver/`, although any name will work.
+				2. [Download the latest Minecraft server .jar file](https://www.minecraft.net/en-us/download/server/) to that new folder, and call it `minecraft_server.jar
+				3. Open a terminal inside that new folder, to run your Minecraft server in.
+
+			.section
+				+ossection(os.windows).
+					Press #[+keycombo(['Win','R'])] on your keyboard to open the Run dialog. Type in 'taskmgr.exe' and hit Enter. Open the 'Performance' tab near the top of the window, and click 'Memory' to see how much is available.
+				+ossection([os.macos, os.linux]).
+					TBD
 		//		Get latest from https://www.minecraft.net/en-us/download/server/
 		// Run Server
+		//- +mdc-divider()
+		+note({type: 'warning', title: 'Not able to break blocks near spawn?'})
+			:markdown-it(html)
+				Having **any** Operators (OPs) on the server, enables world protections near spawn.
+				If you want non-OP'd players to edit the world, you can remove all the OPs of the server,
+				or set `spawn-protection` to 0 in the [server.properties file](https://minecraft.gamepedia.com/Server.properties).
+				
 		// Port forwarding?
 		//		A port => similar to apt number
 		// Create domain w/ Google Domains
 		// Troubleshooting
-
-		h6.mdc-typography.mdc-typography--headline6.demo-headline MDC Web Quick Start
 
 		script(type='text/javascript', src='index.ts')
