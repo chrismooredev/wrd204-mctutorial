@@ -6,7 +6,7 @@
   "main": "pug/index.pug",
   "scripts": {
     "start": "node node_modules/parcel-bundler/bin/cli.js ./src/index.pug --out-dir docs",
-    "build": "node node_modules/parcel-bundler/bin/cli.js build ./src/index.pug --out-dir docs"
+    "build": "node node_modules/parcel-bundler/bin/cli.js build ./src/index.pug --out-dir docs --public-url /wrd204-mctutorial"
   },
   "author": "",
   "license": "ISC",
