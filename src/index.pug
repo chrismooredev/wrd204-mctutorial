@@ -1,112 +1,15 @@
 
--
-	const AutoInitAttr = (type) => ({ 'data-mdc-auto-init': type })
-	const fgen = (first, second) => {
-		let isFirst = true
-		return () => {
-			if(!isFirst){
-				return second
-			}
-			isFirst = false
-			return first
-		}
-	}
+include mixins.pug
 
+-
 	// ensure is synced with .scss and .ts
 	const os = {
 		linux: 'ubuntu',
 		windows: 'windows',
 		macos: 'apple',
 	}
-
-mixin icon(name, brand='Material Icons')
-	case brand
-		when 'Material Icons'
-			mwc-icon.icon= name
-		when 'fas'
-		when 'fab'
-			.icon(class=[brand, 'fa-'+name])
-		default
-			- throw new Error(`Unknown icon provider: '${brand}' (requested for icon ${name})`)
-
-//mixin note(type, title, ido, icon_brand)
-mixin note(opts)
-	-
-		// opts: { type: class, title?: string, id?: string, icon? = type, icon_brand? = string}
-		opts = opts || {}
-		const icon_desc = [opts.icon || opts.type, opts.icon_brand];
-		console.assert(opts.type);
-		const partcls = part => `note-${part}-${opts.type || 'info'}`;
-	table(class=partcls('container'), id=opts.id)
-		if title
-			tr
-				td(class=partcls('icon')): +icon(...icon_desc)
-				td: h3(class=partcls('title'))= title
-			tr
-				td
-				td: div(class=partcls('body')): block
-		else
-			tr
-				td(class=partcls('icon')): +icon(...icon_desc)
-				td: div(class=partcls('body')): block
-
-//- Mostly for consistency sake
-mixin mdc-typography(style, ido)
-	case style
-		when 'headline1'
-		when 'headline2'
-		when 'headline3'
-		when 'headline4'
-		when 'headline5'
-		when 'headline6'
-		when 'subtitle1'
-		when 'subtitle2'
-		when 'body1'
-		when 'body2'
-		when 'caption'
-		when 'button'
-		when 'overline'
-			.mdc-typography(class='mdc-typography--'+style, id=ido ? 'container-'+ido : undefined)
-				block
-		default
-			- throw new Error('Illegal typography style: ' + style);
-mixin mdc-divider()
-	hr.mdc-divider
-
-mixin keycombo(keyarr)
-	for k,i in keyarr
-		case k
-			when 'Win'
-				span.key.icon.fab.fa-windows
-			default
-				span.key= k
-		if i !== keyarr.length-1
-			span +
-
-mixin ossection(os)
-	if typeof os === 'string'
-		+note({
-			type: 'ossection',
-			icon: os, icon_brand: 'fab',
-		})
-			block
-	else
-		for o in os
-			+note(o)
-				block
-	//-
-		if typeof os === 'string'
-			table.ossection(class=os)
-				tr
-					td: +icon(os, 'fab')
-					td
-						block
-		else
-			for o in os /* it was an array, duplicate its contents */
-				+ossection(o)
-					block
-
-- const iconDescriptor = (font, name) => ({ hasImageIcon: true, icon })
+	os.DEFAULT = os.windows;
+	//console.log(pug_mixins);
 
 html
 	head
@@ -123,34 +26,12 @@ html
 		script(type='text/javascript', src='../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js')
 	body
 		#header.section
-			mwc-tab-bar#tabsChooseOS(style='color: rgba(255, 255, 255, 0.2)')
-				mwc-tab(label='Windows 10' hasImageIcon)
-					+icon(os.windows, 'fab')
-				mwc-tab(label='macOS' hasImageIcon)
-					+icon(os.macos, 'fab')
-				mwc-tab(label='Linux' hasImageIcon)
-					+icon(os.linux, 'fab')
 			+mdc-typography('headline4') How to: Install a Minecraft Server
-			//.section
+			include sections/os-chooser.pug
 
 		+mdc-divider()
-		
-		//- mwc-textfield(id='nameFirst', label='First Name')
-		//- mwc-textfield(id='nameLast', label='Last Name')
-		//- mwc-button(id='btnGreet' label='Greet Me!' raised)
-		//- #txtGreet
-		
-		// Choose OS for instructions
+		//include sections/test-notes.pug
 
-		//-
-		+note({type: 'warning', title: "Don't mess up (w/ title)"})
-			| Titled ya doofus
-		+note
-			| Untitled doofus
-		+note({type: 'info', title: "Don't forget!"})
-			| heyo
-		
-		
 		//- Install Java
 			//- Good Reference
 			//- https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-debian-10
@@ -172,35 +53,27 @@ html
 						
 						have fun!
 
-		#requirements.section
-			:markdown-it(html)
-				## Requirements
-				A server with the following number of players should have the following amount of spare RAM and storage:
-				| Players | RAM  | Storage  |
-				|---------|------|----------|
-				| 1-5     | 3 GB | 10-20 GB |
-				| 5-10    | 6 GB | 20-30 GB |
-				| 10+     | 8 GB | 30+ GB   |
-				*Storage space will be dependant on how much your players explore the world.*
+		- expanded=true // auto open requirements
+		include sections/requirements.pug
 
 		+mdc-divider()
+		//- +mdc-divider()
 
 		// Install Server
 		#install-server.section
 			:markdown-it(html)
 				1. Create a new folder on your computer to put the server files
 					* For this tutorial, this folder will be called `mcserver/`, although any name will work.
-				2. [Download the latest Minecraft server .jar file](https://www.minecraft.net/en-us/download/server/) to that new folder, and call it `minecraft_server.jar
+				2. Download the latest [Minecraft server .jar file](https://www.minecraft.net/en-us/download/server/) to that new folder, and rename it to `minecraft_server.jar`
 				3. Open a terminal inside that new folder, to run your Minecraft server in.
 
 			.section
 				+ossection(os.windows).
 					Press #[+keycombo(['Win','R'])] on your keyboard to open the Run dialog. Type in 'taskmgr.exe' and hit Enter. Open the 'Performance' tab near the top of the window, and click 'Memory' to see how much is available.
 				+ossection([os.macos, os.linux]).
-					TBD
+					TBD (macOS/Linux sections)
 		//		Get latest from https://www.minecraft.net/en-us/download/server/
 		// Run Server
-		//- +mdc-divider()
 		+note({type: 'warning', title: 'Not able to break blocks near spawn?'})
 			:markdown-it(html)
 				Having **any** Operators (OPs) on the server, enables world protections near spawn.

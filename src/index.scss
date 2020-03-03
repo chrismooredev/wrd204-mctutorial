@@ -28,11 +28,11 @@ $secondary-text-color: #757575;
 $divider-color:        #BDBDBD;*/
 
 // ensure is synced with .pug and .ts
-$linux: 'ubuntu';
 $windows: 'windows';
 $macos: 'apple';
+$linux: 'ubuntu';
 
-$pageWidth: 800px;
+$pageWidth: 900px;
 $gray: #868686;
 
 :root {
@@ -203,7 +203,7 @@ mwc-icon.fab {
 //primary - green - 4caf50
 //secondary - brown - 8d6e63
 
-#requirements table {
+table.bordered {
 	border-collapse: collapse;
 
 	tr > * { // includes th and td for header and data cells
@@ -225,4 +225,65 @@ mwc-icon.fab {
 	margin: 2px 2px;
 }
 
+.side-by-side {
+	display: inline-flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	width: 100%;
+	margin-top: 4px;
+	margin-bottom: 4px;
+
+	> :not(:first-child) {
+		margin-left: 4px;
+	}
+	> :not(:last-child) {
+		margin-right: 4px;
+	}
+}
+
+.centered {
+	text-align: center;
+}
+
+.tt::after {
+	content: "?";
+	font-size: 0.7em;
+	vertical-align: top;
+}
+
+details.zippy-wrapper {
+	width: $pageWidth * 0.8;
+
+	&[open] {
+		.zippy-container-folded {
+			display: none;
+		}
+	}
+	&:not([open]) {
+		.zippy-container-expanded {
+			display: none;
+		}
+	}
+	summary {
+		display: inline-flex;
+		justify-content: flex-start;
+		width: 100%; // Space this to the containing `details` so the icon can be in the proper spot
+		color: var(--mdc-theme-primary);
+		align-items: center;
+
+		.zippy-fold-icon {
+			margin-left: auto;
+			--mdc-icon-size: 32px;
+		}
+		&::-webkit-details-marker {
+			display: none; // Disable native chrome fold icon
+		}
+	}
+	.zippy-body { // 'contain' the contents a bit
+		margin-left: 8px;
+		margin-right: 8px;
+		border-left: 2px solid var(--mdc-theme-on-primary);
+		padding-left: 8px;
+	}
+}
 

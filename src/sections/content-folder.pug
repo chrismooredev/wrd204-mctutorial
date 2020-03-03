@@ -1,0 +1,14 @@
+
+//- reference can be found on https://support.google.com/ads/answer/2662856
+
+details.zippy-wrapper(open=expanded)
+	summary(class=[summary_view])
+		div
+			block title
+		.zippy-fold-icon
+			.zippy-container-folded
+				+icon('keyboard_arrow_down')
+			.zippy-container-expanded
+				+icon('keyboard_arrow_up')
+	.zippy-body.zippy-container-expanded
+		block body

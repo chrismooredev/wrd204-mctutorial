@@ -1,0 +1,102 @@
+
+-
+	const AutoInitAttr = (type) => ({ 'data-mdc-auto-init': type })
+	const fgen = (first, second) => {
+		let isFirst = true
+		return () => {
+			if(!isFirst){
+				return second
+			}
+			isFirst = false
+			return first
+		}
+	}
+	const iconDescriptor = (font, name) => ({ hasImageIcon: true, icon })
+
+mixin icon(name, brand='Material Icons')
+	case brand
+		when 'Material Icons'
+			mwc-icon.icon= name
+		when 'fas'
+		when 'fab'
+			.icon(class=[brand, 'fa-'+name])
+		default
+			- throw new Error(`Unknown icon provider: '${brand}' (requested for icon ${name})`)
+
+//mixin note({ type: class, title?: string, id?: string, icon?: string = type, icon_brand?: string, class?: string[]})
+mixin note(opts)
+	-
+		// opts: { type: class, title?: string, id?: string, icon? = type, icon_brand? = string}
+		opts = opts || {}
+		const icon_desc = [opts.icon || opts.type, opts.icon_brand];
+		const partcls = part => `note-${part}-${opts.type || 'info'}`;
+	if opts.class
+		//- Some classes/dynamic attributes (*cough* hidden *cough*) don't work on a table, so wrap it in a div
+		div(class=opts.class)
+			- opts.class=undefined
+			+note(opts)
+				block
+	else
+		table(class=[partcls('container')], id=opts.id)
+			if title
+				tr
+					td(class=partcls('icon')): +icon(...icon_desc)
+					td: h3(class=partcls('title'))= title
+				tr
+					td
+					td: div(class=partcls('body')): block
+			else
+				tr
+					td(class=partcls('icon')): +icon(...icon_desc)
+					td: div(class=partcls('body')): block
+
+//- Mostly for consistency sake
+mixin mdc-typography(style, ido)
+	case style
+		when 'headline1'
+		when 'headline2'
+		when 'headline3'
+		when 'headline4'
+		when 'headline5'
+		when 'headline6'
+		when 'subtitle1'
+		when 'subtitle2'
+		when 'body1'
+		when 'body2'
+		when 'caption'
+		when 'button'
+		when 'overline'
+			.mdc-typography(class='mdc-typography--'+style, id=ido ? 'container-'+ido : undefined)
+				block
+		default
+			- throw new Error('Illegal typography style: ' + style);
+mixin mdc-divider()
+	hr.mdc-divider
+
+mixin keycombo(keyarr)
+	for k,i in keyarr
+		case k
+			when 'Win'
+				span.key.icon.fab.fa-windows
+			default
+				span.key= k
+		if i !== keyarr.length-1
+			span +
+
+mixin ossection(osname)
+	if typeof osname === 'string'
+		div(class=osname, hidden=(osname != os.DEFAULT))
+			+note({
+				type: 'ossection',
+				icon: osname, icon_brand: 'fab',
+			})
+				block
+	else
+		for o in osname
+			+ossection(o)
+				block
+
+mixin zippy(title)
+	.zippy-container
+
+
