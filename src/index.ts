@@ -62,7 +62,8 @@ declare let shown_os: string;
 })();
 
 const tabsChooseOS = document.getElementById('tabsChooseOS') as MDCTabBar;
-tabsChooseOS.addEventListener('MDCTabBar:activated', (ce: CustomEvent) => {
+tabsChooseOS.addEventListener('MDCTabBar:activated', (e: Event) => {
+	const ce = e as CustomEvent;
 	switch(ce.detail.index) {
 		case 0:
 			shown_os = OSType.Windows;
