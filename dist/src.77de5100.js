@@ -35767,6 +35767,27 @@ var OSType;
 
 var DEFAULT_OS = OSType.Windows;
 
+function attachTabBarChooser(tabBarID, choices, cb) {
+  var tabs = document.getElementById(tabBarID);
+  tabs.addEventListener('MDCTabBar:activated', function (e) {
+    var ind = e.detail.index;
+
+    if (ind in choices) {
+      cb(choices[ind], ind);
+    } else {
+      throw new Error("Unmapped tab index: '".concat(ind, "' (max tab index = ").concat(choices.length - 1, ")!"));
+    }
+  });
+}
+
+function update_url_param(name, value) {
+  if (history && history.replaceState) {
+    var loc = new URL(document.location.href);
+    if (value) loc.searchParams.set(name, value);else loc.searchParams.delete(name);
+    history.replaceState(null, "How to Install a Minecraft Server", loc.href);
+  }
+}
+
 (function () {
   // Get last OS or select default
   var os = DEFAULT_OS;
@@ -35778,7 +35799,7 @@ var DEFAULT_OS = OSType.Windows;
       var OSs = Object.values(OSType);
 
       if (!OSs.includes(v)) {
-        console.error(new Error("Unknown OS '" + v + "'! Setting to default."));
+        console.error(new Error("Unknown OS '".concat(v, "'! Setting to default.")));
         v = DEFAULT_OS;
       }
 
@@ -35793,39 +35814,19 @@ var DEFAULT_OS = OSType.Windows;
           if (clsNme === os) ele.removeAttribute('hidden');else ele.setAttribute('hidden', '');
         });
       });
-
-      if (history && history.replaceState) {
-        var loc = new URL(document.location.href);
-        loc.searchParams.set('os', os);
-        history.replaceState(null, "How to Install a Minecraft Server (" + os + ")", loc.href);
-      }
+      update_url_param('os', os);
     }
   });
   var from_url = new URLSearchParams(document.location.search).get('os');
 
   if (from_url && from_url != os) {
+    // if it is set to non-default
     shown_os = from_url;
   }
 })();
 
-var tabsChooseOS = document.getElementById('tabsChooseOS');
-tabsChooseOS.addEventListener('MDCTabBar:activated', function (ce) {
-  switch (ce.detail.index) {
-    case 0:
-      shown_os = OSType.Windows;
-      break;
-
-    case 1:
-      shown_os = OSType.macOS;
-      break;
-
-    case 2:
-      shown_os = OSType.Linux;
-      break;
-
-    default:
-      throw new Error("Setting to unknown OS index: '" + ce.detail.index + "'!");
-  }
+attachTabBarChooser('tabsChooseOS', [OSType.Windows, OSType.macOS, OSType.Linux], function (choice) {
+  shown_os = choice;
 });
 },{"./index.scss":"index.scss","@fortawesome/fontawesome-free/css/all.css":"../node_modules/@fortawesome/fontawesome-free/css/all.css","@material/mwc-button":"../node_modules/@material/mwc-button/mwc-button.js","@material/mwc-icon":"../node_modules/@material/mwc-icon/mwc-icon.js","@material/mwc-tab-bar":"../node_modules/@material/mwc-tab-bar/mwc-tab-bar.js","@material/mwc-tab":"../node_modules/@material/mwc-tab/mwc-tab.js","@material/mwc-textfield":"../node_modules/@material/mwc-textfield/mwc-textfield.js","highlight.js":"../node_modules/highlight.js/lib/index.js","highlight.js/styles/zenburn.css":"../node_modules/highlight.js/styles/zenburn.css"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -35855,7 +35856,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56034" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57847" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

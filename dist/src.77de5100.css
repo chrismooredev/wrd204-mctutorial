@@ -7128,7 +7128,7 @@ body {
   color: #afafaf;
   background-color: var(--mdc-theme-background);
   font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
-  max-width: 800px;
+  max-width: 900px;
 }
 
 a {
@@ -7188,8 +7188,8 @@ mwc-icon.fab {
   vertical-align: baseline;
   display: inline-block;
   margin: 4px;
-  min-width: 400px;
-  max-width: 600px;
+  min-width: 450px;
+  max-width: 700px;
   background-color: red;
   border: solid blue;
 }
@@ -7259,10 +7259,10 @@ mwc-icon.fab {
   margin: 2px;
 }
 
-#requirements table {
+table.bordered {
   border-collapse: collapse;
 }
-#requirements table tr > * {
+table.bordered tr > * {
   border: 1px solid #868686;
   padding: 4px;
   text-align: center;
@@ -7277,6 +7277,61 @@ mwc-icon.fab {
   box-shadow: 1px 2px 0px 0px #797979;
   font-size: 0.9em;
   margin: 2px 2px;
+}
+
+.side-by-side {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+.side-by-side > :not(:first-child) {
+  margin-left: 4px;
+}
+.side-by-side > :not(:last-child) {
+  margin-right: 4px;
+}
+
+.centered {
+  text-align: center;
+}
+
+.tt::after {
+  content: "?";
+  font-size: 0.7em;
+  vertical-align: top;
+}
+
+details.zippy-wrapper {
+  width: 720px;
+}
+details.zippy-wrapper[open] .zippy-container-folded {
+  display: none;
+}
+details.zippy-wrapper:not([open]) .zippy-container-expanded {
+  display: none;
+}
+details.zippy-wrapper summary {
+  display: inline-flex;
+  justify-content: flex-start;
+  width: 100%;
+  color: var(--mdc-theme-primary);
+  align-items: center;
+}
+details.zippy-wrapper summary .zippy-fold-icon {
+  margin-left: auto;
+  --mdc-icon-size: 32px;
+}
+details.zippy-wrapper summary::-webkit-details-marker {
+  display: none;
+}
+details.zippy-wrapper .zippy-body {
+  margin-left: 8px;
+  margin-right: 8px;
+  border-left: 2px solid var(--mdc-theme-on-primary);
+  padding-left: 8px;
 }
 /*
 
