@@ -5,8 +5,8 @@
   "description": "",
   "main": "pug/index.pug",
   "scripts": {
-    "start": "node node_modules/parcel-bundler/bin/cli.js ./src/index.pug",
-    "build": "node node_modules/parcel-bundler/bin/cli.js build ./src/index.pug"
+    "start": "node node_modules/parcel-bundler/bin/cli.js ./src/index.pug --out-dir docs",
+    "build": "node node_modules/parcel-bundler/bin/cli.js build ./src/index.pug --out-dir docs"
   },
   "author": "",
   "license": "ISC",
