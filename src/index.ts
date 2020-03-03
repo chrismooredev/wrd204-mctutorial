@@ -23,6 +23,28 @@ enum OSType {
 }
 const DEFAULT_OS = OSType.Windows;
 
+function attachTabBarChooser<T>(tabBarID: string, choices: T[], cb: (v: T, i: number) => void) {
+	const tabs = document.getElementById(tabBarID) as MDCTabBar;
+	tabs.addEventListener('MDCTabBar:activated', (e: Event) => {
+		const ind: number = (e as CustomEvent).detail.index;
+		if(ind in choices) {
+			cb(choices[ind], ind);
+		} else {
+			throw new Error(`Unmapped tab index: '${ind}' (max tab index = ${choices.length-1})!`);
+		}
+	});
+}
+function update_url_param(name: string, value?: string): void {
+	if(history && history.replaceState) {
+		const loc = new URL(document.location.href);
+		if(value)
+			loc.searchParams.set(name, value);
+		else
+			loc.searchParams.delete(name);
+		history.replaceState(null, `How to Install a Minecraft Server`, loc.href);
+	}
+}
+
 // Declare property we are about to define
 declare let shown_os: string;
 (() => {
@@ -48,33 +70,18 @@ declare let shown_os: string;
 					})
 			)
 
-			if(history && history.replaceState) {
-				const loc = new URL(document.location.href);
-				loc.searchParams.set('os', os);
-				history.replaceState(null, `How to Install a Minecraft Server (${os})`, loc.href)
-			}
+			update_url_param('os', os);
 		}
 	});
 	const from_url = new URLSearchParams(document.location.search).get('os');
-	if(from_url && from_url != os) {
+	if(from_url && from_url != os) { // if it is set to non-default
 		shown_os = from_url;
 	}
 })();
 
-const tabsChooseOS = document.getElementById('tabsChooseOS') as MDCTabBar;
-tabsChooseOS.addEventListener('MDCTabBar:activated', (e: Event) => {
-	const ce = e as CustomEvent;
-	switch(ce.detail.index) {
-		case 0:
-			shown_os = OSType.Windows;
-			break;
-		case 1:
-			shown_os = OSType.macOS;
-			break;
-		case 2:
-			shown_os = OSType.Linux;
-			break;
-		default:
-			throw new Error(`Setting to unknown OS index: '${ce.detail.index}'!`);
-	}
-});
+attachTabBarChooser('tabsChooseOS', [
+	OSType.Windows,
+	OSType.macOS,
+	OSType.Linux,
+], choice => { shown_os = choice; });
+
