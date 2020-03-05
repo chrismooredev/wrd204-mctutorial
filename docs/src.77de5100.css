@@ -7139,10 +7139,6 @@ a:visited {
   color: #865086;
 }
 
-[class^=language-] {
-  font-family: "Courier New", Courier, monospace;
-}
-
 code {
   background-color: #3f3f3f;
   border-radius: 4px;
@@ -7150,6 +7146,8 @@ code {
   padding: 0.05em 0.25em;
   color: #dcdcdc;
   font-size: 0.9em;
+  white-space: nowrap;
+  font-family: "Courier New", Courier, monospace;
 }
 
 mwc-textfield {
@@ -7229,9 +7227,8 @@ mwc-icon.fab {
 }
 
 .note-container-ossection {
-  background-color: #ffffff12;
+  background-color: #00000033;
   border: solid #868686;
-  color: white;
 }
 .note-container-ossection tr > td {
   padding: 4px;
@@ -7269,7 +7266,7 @@ table.bordered tr > * {
 }
 
 .key {
-  background-color: #ffffffe0;
+  background-color: #ffffffa6;
   color: #000000;
   border-radius: 2px;
   padding: 2px 2px;
@@ -7298,14 +7295,14 @@ table.bordered tr > * {
   text-align: center;
 }
 
-.tt::after {
+abbr::after {
   content: "?";
   font-size: 0.7em;
   vertical-align: top;
 }
 
 details.zippy-wrapper {
-  width: 720px;
+  width: 90%;
 }
 details.zippy-wrapper[open] .zippy-container-folded {
   display: none;
@@ -7319,6 +7316,7 @@ details.zippy-wrapper summary {
   width: 100%;
   color: var(--mdc-theme-primary);
   align-items: center;
+  border-bottom: 1px solid #ffffff80;
 }
 details.zippy-wrapper summary .zippy-fold-icon {
   margin-left: auto;
@@ -7330,8 +7328,9 @@ details.zippy-wrapper summary::-webkit-details-marker {
 details.zippy-wrapper .zippy-body {
   margin-left: 8px;
   margin-right: 8px;
-  border-left: 2px solid var(--mdc-theme-on-primary);
-  padding-left: 8px;
+  border-left: 2px solid #ffffff80;
+  padding: 8px;
+  margin-bottom: 8px;
 }
 /*
 
