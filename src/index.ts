@@ -23,8 +23,12 @@ enum OSType {
 }
 const DEFAULT_OS = OSType.Windows;
 
-function attachTabBarChooser<T>(tabBarID: string, choices: T[], cb: (v: T, i: number) => void) {
+function attachTabBarChooser<T>(tabBarID: string, choices: T[], cb: (v: T, i: number) => void, defChoice?: number) {
 	const tabs = document.getElementById(tabBarID) as MDCTabBar;
+	if(typeof defChoice == 'number') {
+		console.log("Setting index of ", tabs, " to ", defChoice);
+		tabs.activeIndex = defChoice;
+	}
 	tabs.addEventListener('MDCTabBar:activated', (e: Event) => {
 		const ind: number = (e as CustomEvent).detail.index;
 		if(ind in choices) {
@@ -79,9 +83,10 @@ declare let shown_os: string;
 	}
 })();
 
-attachTabBarChooser('tabsChooseOS', [
-	OSType.Windows,
-	OSType.macOS,
-	OSType.Linux,
-], choice => { shown_os = choice; });
-
+const OS_TABS = [ OSType.Windows, OSType.macOS, OSType.Linux ];
+attachTabBarChooser(
+	'tabsChooseOS',
+	OS_TABS,
+	choice => { shown_os = choice; },
+	OS_TABS.findIndex(v => v == shown_os), // Set initial tab to url argument
+);
