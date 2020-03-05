@@ -7,32 +7,29 @@ block title
 block body
 	#requirements
 		.side-by-side
-			div
-				:markdown-it
-					If you want a Minecraft server that is...
-					* Owned and Controlled by YOU
-					* Easy to run
-					* Free
-			div
-				:markdown-it
-					If you are familiar with...
-					* Navigating between folders
-					* Basic command-line usage
-					* Basic Networking (What is an IP Address?)
-		| Use the table below to estimate if your computer is suitable:
-
+				div
+					:markdown-it
+						If you want a Minecraft server that is...
+						* Owned and Controlled by YOU
+						* Easy to run
+						* Free (or very cheap!)
+				div
+					:markdown-it
+						If you are familiar with...
+						* Navigating between folders
+						* Basic command-line usage
+						* Basic Networking (What is an IP Address?)
 		.centered
+			p If you have a computer with enough spare resources for your players...
 			.side-by-side
-				span
-					table.bordered
-						tr
-							th Players
-							th.tt(title="Random Access Memory. You should consistently have this amount of RAM spare for the server. Open Task Manager to find out how much RAM your computer has.")
-								| RAM
-							th.tt(title="Approximately how much space you need for your world; dependent on how often players explore")
-								| Storage
-						tr #[td 1-5 ] #[td 3 GB] #[td 10-20GB]
-						tr #[td 5-10] #[td 6 GB] #[td 20-30GB]
-						tr #[td 10+ ] #[td 8 GB] #[td 30+GB]
-				span hey! I still exist!
-		i Redundant text
+				table.bordered
+					tr
+						th Players
+						th: abbr(title="Random Access Memory. You should consistently have this amount of RAM spare for the server. Open Task Manager to find out how much RAM your computer has.")
+							| RAM
+						th: abbr(title="Approximately how much space you need for your world; dependent on how often players explore. Open My PC to find out how much spare storage space your computer has.")
+							| Storage
+					tr #[td 1-5 ] #[td 3 GB] #[td 10-20GB]
+					tr #[td 5-10] #[td 6 GB] #[td 20-30GB]
+					tr #[td 10+ ] #[td 8 GB] #[td 30+GB]
+			p Then this guide #[strong IS] for you!

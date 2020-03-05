@@ -1,0 +1,43 @@
+extends content-folder.pug
+
+block title
+	h2 Install Java
+
+block body
+	#install-java
+		+note({type: 'info', title: 'Do I need to do this?'}).
+			If you've installed Java before, that should work for the server. One thing to double check though, is if Java is on your system #[abbr(title='The path is a shared list of folders that programs can use to find other programs.') path]. A quick way to do that on Windows, is to open the run dialog (#[+keycombo(['Win', 'R'])]), putting in `java` and hitting Enter. If you don't get an error, and can skip this section.
+
+		h3 Installing Java
+		.windows
+			:markdown-it(html)
+				Go to the [download page for the <abbr title='Java Runtime Environment. Regular Java without the tools needed to develop Java applications.'>Oracle Java JRE</abbr>](https://www.java.com/en/download/) and press the red 'Java Download' button. It should auto-detect your operating system, and give you an 'Agree and Start Free Download' button. Read the license agreement, and hit the button to download the Java JRE installer.  
+				Once the installer is downloaded, you should run it until Java is installed.
+		.apple macOS instructions not available.
+		.ubuntu
+			// linux https://docs.oracle.com/javase/8/docs/technotes/guides/install/linux_jre.html
+			// good reference https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-debian-10
+			:markdown-it
+				If you are using a Ubuntu/Debian-based Server (If you are using linux, but aren't sure, you probably are), you can use this simple command to install a version of Java suitable for the server.
+				``` bash
+				sudo apt-get install openjdk-8-jre-headless
+				```
+		h3 Putting Java on the Path
+		.windows
+			:markdown-it(html)
+				* Get Java's installation folder
+					1. Navigate to `C:\Program Files\Java`.
+					2. Select a folder
+						* Prefer folders starting with `jdk` over `jre`
+						* Prefer folders with a higher version number
+					3. Enter that folder, and hold shift while right-clicking the `bin` folder.
+					4. Select `Copy as path`
+				* Add the folder to the system or user path
+					1. Press the windows key (<span class="key icon fab fa-windows"></span>) and type `path`
+					2. Select either `Edit the system environment variables` or `Edit environment variables for your account`
+						* If you chose the system-wide option, you may have to click `Environment Variables...` in the window that pops up
+					3. Double click on the `Path` entry to edit it
+					4. Click `New` and paste the previously-copied Java bin folder location into the new row
+					5. Hit `Ok` until the opened windows are closed
+		.apple macOS instructions not available.
+		.ubuntu For Linux systems, installation should have already put Java on your path.

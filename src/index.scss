@@ -33,7 +33,8 @@ $macos: 'apple';
 $linux: 'ubuntu';
 
 $pageWidth: 900px;
-$gray: #868686;
+$clrGray: #868686;
+$clrDivider: #ffffff80;
 
 :root {
 	--mdc-tab-text-label-color-default: #000000;
@@ -76,9 +77,6 @@ a:visited {
 	color: rgb(134, 80, 134);
 }
 
-[class^="language-"] {
-	font-family: "Courier New", Courier, monospace;
-}
 code {
 	background-color: #3f3f3f;
 	border-radius: 4px;
@@ -86,6 +84,8 @@ code {
 	padding: 0.05em 0.25em;
 	color: #dcdcdc;
 	font-size: 0.9em;
+	white-space: nowrap;
+	font-family: "Courier New", Courier, monospace;
 }
 
 mwc-textfield {
@@ -102,7 +102,7 @@ mwc-icon.fab {
 }
 .mdc-divider {
 	border: none;
-	border-top: 1px solid #ffffff80;
+	border-top: 1px solid $clrDivider;
 	width: 85%;
 	//margin: 2rem;
 }
@@ -168,10 +168,10 @@ mwc-icon.fab {
 	color: black;
 }
 .note-container-ossection {
-	//border-radius: 2px;
-	background-color: #ffffff12;
-	border: solid $gray;
-	color: white;
+	//background-color: #ffffff12;
+	background-color: #00000033;
+	border: solid $clrGray;
+	// color: white;
 
 	tr > td {
 		padding: 4px;
@@ -207,7 +207,7 @@ table.bordered {
 	border-collapse: collapse;
 
 	tr > * { // includes th and td for header and data cells
-		border: 1px solid $gray;
+		border: 1px solid $clrGray;
 		padding: 4px;
 		text-align: center;
 	}
@@ -245,14 +245,14 @@ table.bordered {
 	text-align: center;
 }
 
-.tt::after {
+abbr::after {
 	content: "?";
 	font-size: 0.7em;
 	vertical-align: top;
 }
 
 details.zippy-wrapper {
-	width: $pageWidth * 0.8;
+	width: 90%;
 
 	&[open] {
 		.zippy-container-folded {
@@ -270,6 +270,7 @@ details.zippy-wrapper {
 		width: 100%; // Space this to the containing `details` so the icon can be in the proper spot
 		color: var(--mdc-theme-primary);
 		align-items: center;
+		border-bottom: 1px solid $clrDivider;
 
 		.zippy-fold-icon {
 			margin-left: auto;
@@ -282,8 +283,10 @@ details.zippy-wrapper {
 	.zippy-body { // 'contain' the contents a bit
 		margin-left: 8px;
 		margin-right: 8px;
-		border-left: 2px solid var(--mdc-theme-on-primary);
-		padding-left: 8px;
+		border-left: 2px solid $clrDivider;
+		// padding-left: 8px;
+		padding: 8px;
+		margin-bottom: 8px;
 	}
 }
 

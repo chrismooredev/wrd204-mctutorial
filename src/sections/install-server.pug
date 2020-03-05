@@ -1,0 +1,24 @@
+extends content-folder.pug
+
+block title
+	h2 Download & Install
+
+block body
+	#install-server
+		:no-p-wrap():markdown-it(html)
+			1. Create a new folder on your computer to put the server files
+			2. Download the latest Minecraft server .jar file from [minecraft.net](https://www.minecraft.net/en-us/download/server/) to that new folder, and rename it to `minecraft_server.jar`
+			3. Open a terminal inside that new folder, to run your Minecraft server in.
+		+ossection(os.windows).
+			To open a terminal inside a folder, shift-right click on an empty part in the folder, and choose 'Open Powershell Window Here' or 'Open Command Window Here'
+		:no-p-wrap():abbrs(terms={
+			'-Xms': 'Minimum amount of RAM given to the server',
+			'-Xmx': 'Maximum amount of RAM given to the server',
+			}):markdown-it(html)
+			4. In your terminal, run the command
+				`java -Xms 1024M -Xmx 1024M  -jar minecraft_server.jar`  
+				*Change `1024` to be 1024 times the suggested RAM amount. Both -Xms and -Xmx should have the same value*
+		+ossection(os.windows).
+			A window may pop up to allow your Minecraft server through the firewall. You should allow it through.
+		+ossection([os.macos, os.linux]).
+			TBD (macOS/Linux sections)

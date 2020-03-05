@@ -14,6 +14,8 @@ include mixins.pug
 html
 	head
 		meta(charset='UTF-8')
+		// Fix CSS oddities on mobile
+		//meta(name='viewport' content='width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86')
 		title Heyo! (feat. Web Components!)
 
 		link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500")
@@ -28,61 +30,29 @@ html
 		#header.section
 			+mdc-typography('headline4') How to: Install a Minecraft Server
 			include sections/os-chooser.pug
-
-		+mdc-divider()
-		//include sections/test-notes.pug
-
-		//- Install Java
-			//- Good Reference
-			//- https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-debian-10
-		//
-			#install-java.section
-				| Historically, the standard Oracle Java did not require a login to download. They have changed this to require one. I recommend using Oracle Java if you do not mind creating a new account. OpenJDK does not require creating a new account, however it may be more difficult to install.
-				.windows(class='"Material Icons"')
-					| Go to 
-					include:markdown-it(langPrefix='language-') install_java_win.md
-				.macos.linux(hidden)
-					// linux https://docs.oracle.com/javase/8/docs/technotes/guides/install/linux_jre.html
-					:markdown-it(langPrefix='language-')
-						### Markdown (Inline)
-						If you are using Debian/Ubuntu Server (If you are using linux, but aren't sure, you probably are), you can use this simple command to install Java
-						> :warning: ohh
-						```bash
-						$ sudo apt-get install openjdk-8-jre-headless
-						```
-						
-						have fun!
-
-		- expanded=true // auto open requirements
+		
+		- expand_def = false // Should the section be auto-expanded?
+		- expanded=true
 		include sections/requirements.pug
 
-		+mdc-divider()
-		//- +mdc-divider()
+		- expanded=expand_def
+		include sections/install-java.pug
+		
+		- expanded=expand_def
+		include sections/install-server.pug
 
-		// Install Server
-		#install-server.section
-			:markdown-it(html)
-				1. Create a new folder on your computer to put the server files
-					* For this tutorial, this folder will be called `mcserver/`, although any name will work.
-				2. Download the latest [Minecraft server .jar file](https://www.minecraft.net/en-us/download/server/) to that new folder, and rename it to `minecraft_server.jar`
-				3. Open a terminal inside that new folder, to run your Minecraft server in.
-
-			.section
-				+ossection(os.windows).
-					Press #[+keycombo(['Win','R'])] on your keyboard to open the Run dialog. Type in 'taskmgr.exe' and hit Enter. Open the 'Performance' tab near the top of the window, and click 'Memory' to see how much is available.
-				+ossection([os.macos, os.linux]).
-					TBD (macOS/Linux sections)
 		//		Get latest from https://www.minecraft.net/en-us/download/server/
 		// Run Server
-		+note({type: 'warning', title: 'Not able to break blocks near spawn?'})
-			:markdown-it(html)
-				Having **any** Operators (OPs) on the server, enables world protections near spawn.
-				If you want non-OP'd players to edit the world, you can remove all the OPs of the server,
-				or set `spawn-protection` to 0 in the [server.properties file](https://minecraft.gamepedia.com/Server.properties).
-				
+		//
+			+note({type: 'warning', title: 'Not able to break blocks near spawn?'})
+				:no-p-wrap():markdown-it(html)
+					Having **any** Operators (OPs) on the server, enables world protections near spawn.
+					If you want non-OP'd players to edit the world, you can remove all the OPs of the server,
+					or set `spawn-protection` to 0 in the [server.properties file](https://minecraft.gamepedia.com/Server.properties).
+					
 		// Port forwarding?
 		//		A port => similar to apt number
-		// Create domain w/ Google Domains
+		// Create domain w/ Google Domains?
 		// Troubleshooting
 
 		script(type='text/javascript', src='index.ts')
