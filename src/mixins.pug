@@ -38,10 +38,10 @@ mixin note(opts)
 				block
 	else
 		table(class=[partcls('container')], id=opts.id)
-			if title
+			if opts.title
 				tr
 					td(class=partcls('icon')): +icon(...icon_desc)
-					td: h3(class=partcls('title'))= title
+					td: h3(class=partcls('title'))= opts.title
 				tr
 					td
 					td: div(class=partcls('body')): block
