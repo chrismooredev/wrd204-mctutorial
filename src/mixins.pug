@@ -73,15 +73,21 @@ mixin mdc-typography(style, ido)
 mixin mdc-divider()
 	hr.mdc-divider
 
+mixin key(key)
+	case key
+		when 'Win'
+			span.key.icon.fab.fa-windows
+		default
+			span.key= key
+
 mixin keycombo(keyarr)
-	for k,i in keyarr
-		case k
-			when 'Win'
-				span.key.icon.fab.fa-windows
-			default
-				span.key= k
-		if i !== keyarr.length-1
-			span +
+	if typeof keyarr == 'string'
+		+key(keyarr)
+	else
+		for k,i in keyarr
+			+key(k)
+			if i !== keyarr.length-1
+				span +
 
 mixin ossection(osname)
 	if typeof osname === 'string'
