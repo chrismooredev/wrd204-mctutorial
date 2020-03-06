@@ -7,17 +7,23 @@ block body
 	#install-server
 		:no-p-wrap():markdown-it(html)
 			1. Create a new folder on your computer to put the server files
+				- The server will put all of its own files here, so do not use a preexisting folder!
 			2. Download the latest Minecraft server .jar file from [minecraft.net](https://www.minecraft.net/en-us/download/server/) to that new folder, and rename it to `minecraft_server.jar`
 			3. Open a terminal inside that new folder, to run your Minecraft server in.
 		+ossection(os.windows).
 			To open a terminal inside a folder, shift-right click on an empty part in the folder, and choose 'Open Powershell Window Here' or 'Open Command Window Here'
-		:no-p-wrap():abbrs(terms={
-			'-Xms': 'Minimum amount of RAM given to the server',
-			'-Xmx': 'Maximum amount of RAM given to the server',
-			}):markdown-it(html)
-			4. In your terminal, run the command
-				`java -Xms 1024M -Xmx 1024M  -jar minecraft_server.jar`  
-				*Change `1024` to be 1024 times the suggested RAM amount. Both -Xms and -Xmx should have the same value*
+		:no-p-wrap():markdown-it(html plugins=['markdown-it-abbr'])
+			*[-Xms]: Minimum amount of RAM given to the server
+			*[-Xmx]: Maximum amount of RAM given to the server
+			*[EULA]: End User License Agreement. Lines out rules for server owners. Most talked about clause within the Minecraft community is that server owners are not allowed to trade/sell in-game benefits for out-of-game items or currency.
+			4. In your terminal, <abbr title="Enter the following in your terminal, and hit Enter">run</abbr> the command
+				`java -Xms1024M -Xmx1024M  -jar minecraft_server.jar -nogui`  
+				*Change `1024` to be 1024 times the suggested RAM amount. Both -Xms and -Xmx should have the same value.*
+			5. The server will immediately exit, because you need to agree to the server EULA.
+			6. Open the generated `eula.txt` file, read the EULA, and replace `eula=false` with `eula=true`
+			7. Run the same command you used earlier again (you can hit Up to bring it back)
+			### You now have a fully functioning Minecraft server!
+			If you would like to test your server at this stage, you can go open Minecraft on the same computer, and use `localhost` as the server address.
 		+ossection(os.windows).
 			A window may pop up to allow your Minecraft server through the firewall. You should allow it through.
 		+ossection([os.macos, os.linux]).
