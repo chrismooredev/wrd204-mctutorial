@@ -5,8 +5,24 @@ block title
 
 block body
 	#install-java
-		+note({type: 'info', title: 'Do I need to do this?'}).
-			If you've installed Java before, that should work for the server. One thing to double check though, is if Java is on your system #[abbr(title='The path is a shared list of folders that programs can use to find other programs.') path]. A quick way to do that on Windows, is to open the run dialog (#[+keycombo(['Win', 'R'])]), putting in `java` and hitting Enter. If you don't get an error, and can skip this section.
+		+note({type: 'info', title: 'Do I need to do this?'})
+			- pathdef = 'The path is a shared list of folders that programs can use to find other programs.'
+			| If you have previously installed Java, that will work for the server.
+			br
+			+osblock(os.windows)
+				br
+				i If you are unsure if Java is installed:
+				ul
+					li Open the run dialog (#[+keycombo(['Win', 'R'])])
+					li Type in #[code C:\Program Files\Java] and hit #[+keycombo('Enter')]
+					li If a folder opened, Java is installed (but may not be on your path!)
+			br
+			| If Java is already installed, ensure it is on the #[abbr(title=pathdef) system path].
+			+osblock(os.windows)
+				ul
+					li Open the run dialog (#[+keycombo(['Win', 'R'])])
+					li Type in #[code java] and hit #[+keycombo('Enter')]
+					li If you don't get an error, and can skip this section.
 
 		h3 Installing Java
 		.windows

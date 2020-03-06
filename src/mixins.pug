@@ -102,6 +102,15 @@ mixin ossection(osname)
 			+ossection(o)
 				block
 
+mixin osblock(osname)
+	if typeof osname === 'string'
+		.ossection(class=osname, hidden=(osname != os.DEFAULT))
+			block
+	else
+		for o in osname
+			+ossection(o)
+				block
+
 mixin zippy(title)
 	.zippy-container
 

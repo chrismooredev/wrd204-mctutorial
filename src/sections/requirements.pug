@@ -1,6 +1,17 @@
 
 extends content-folder.pug
 
+mixin osabbrvariant(prefix, [windows, macos, linux])
+	+osblock(os.windows)
+		abbr(title=prefix+windows)
+			block
+	+osblock(os.macos)
+		abbr(title=prefix+macos)
+			block
+	+osblock(os.linux)
+		abbr(title=prefix+linux)
+			block
+
 block title
 	h2 Is this guide for you?
 
