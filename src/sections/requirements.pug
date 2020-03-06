@@ -36,7 +36,7 @@ block body
 				table.bordered
 					tr
 						th Players
-						th: abbr(title="Random Access Memory. You should consistently have this amount of RAM spare for the server. Open Task Manager to find out how much RAM your computer has.")
+						th: +osabbrvariant('Random Access Memory. You should consistently have this amount of RAM spare for the server.', [" Open Task Manager's Resources tab to find out how much RAM your computer has.", "", "",])
 							| RAM
 						th: abbr(title="Approximately how much space you need for your world; dependent on how often players explore. Open My PC to find out how much spare storage space your computer has.")
 							| Storage
