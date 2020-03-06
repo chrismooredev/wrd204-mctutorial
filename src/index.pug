@@ -9,6 +9,7 @@ include mixins.pug
 		macos: 'apple',
 	}
 	os.DEFAULT = os.windows;
+	TITLE = 'How to: Install a Minecraft Server'
 	//console.log(pug_mixins);
 
 html
@@ -16,7 +17,7 @@ html
 		meta(charset='UTF-8')
 		// Fix CSS oddities on mobile
 		//meta(name='viewport' content='width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86')
-		title Heyo! (feat. Web Components!)
+		title= TITLE
 
 		link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500")
 		link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons&display=block")
@@ -28,7 +29,7 @@ html
 		script(type='text/javascript', src='../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js')
 	body
 		#header.section
-			+mdc-typography('headline4') How to: Install a Minecraft Server
+			+mdc-typography('headline4')= TITLE
 			include sections/os-chooser.pug
 		
 		- expand_def = false // Should the section be auto-expanded?
