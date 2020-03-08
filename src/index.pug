@@ -44,15 +44,16 @@ html
 		- expanded=expand_def
 		include sections/install-server.pug
 
-		//		Get latest from https://www.minecraft.net/en-us/download/server/
-		// Run Server
-		//
+		- expanded=expand_def
+		//- include sections/configuration.pug
+
+		//-
 			+note({type: 'warning', title: 'Not able to break blocks near spawn?'})
 				:no-p-wrap():markdown-it(html)
 					Having **any** Operators (OPs) on the server, enables world protections near spawn.
 					If you want non-OP'd players to edit the world, you can remove all the OPs of the server,
 					or set `spawn-protection` to 0 in the [server.properties file](https://minecraft.gamepedia.com/Server.properties).
-					
+
 		// Port forwarding?
 		//		A port => similar to apt number
 		// Create domain w/ Google Domains?
