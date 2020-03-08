@@ -15,7 +15,7 @@ block body
 				ul
 					li Open the run dialog (#[+keycombo(['Win', 'R'])])
 					li Type in #[code C:\Program Files\Java] and hit #[+keycombo('Enter')]
-					li If a folder opened, Java is installed (but may not be on your path!)
+					li If a folder opened, Java is installed (but may not be on your #[abbr(title=pathdef) system path]!)
 			br
 			| If Java is already installed, ensure it is on the #[abbr(title=pathdef) system path].
 			+osblock(os.windows)
@@ -26,9 +26,12 @@ block body
 
 		h3 Installing Java
 		.windows
-			:markdown-it(html)
-				Go to the [download page for the <abbr title='Java Runtime Environment. Regular Java without the tools needed to develop Java applications.'>Oracle Java JRE</abbr>](https://www.java.com/en/download/) and press the red 'Java Download' button. It should auto-detect your operating system, and give you an 'Agree and Start Free Download' button. Read the license agreement, and hit the button to download the Java JRE installer.  
-				Once the installer is downloaded, you should run it until Java is installed.
+			- abbrs = { 'JRE': 'Java Runtime Environment. Regular Java without the tools needed to develop Java applications.' }
+			ul
+				li Go to the #[a(href='https://www.java.com/en/download/') download page for the Oracle Java #[abbr(title=abbrs.JRE) JRE]] and press the red #[i Java Download] button.
+				li It should auto-detect your operating system, and give you an 'Agree and Start Free Download' button to press.
+				li Read the license agreement, and hit the button to download the Java JRE installer.  
+				li Once the installer is downloaded, you should run it until Java is installed.
 		.apple macOS instructions not available.
 		.ubuntu
 			// linux https://docs.oracle.com/javase/8/docs/technotes/guides/install/linux_jre.html
