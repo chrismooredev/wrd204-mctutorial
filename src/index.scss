@@ -77,6 +77,26 @@ a:visited {
 	color: rgb(134, 80, 134);
 }
 
+ul, ol {
+	margin-block-start: 0.5em;
+	margin-block-end: 0.5em;
+}
+
+ul, ol {
+	+ [hidden] {
+		margin-block-end: 0em;
+	}
+}
+[hidden] {
+	+ ul, + ol {
+		margin-block-start: 0em;
+	}
+}
+
+.spaced > li {
+	margin: 0.75em;
+}
+
 code {
 	background-color: #3f3f3f;
 	border-radius: 4px;
@@ -121,8 +141,9 @@ mwc-icon.fab {
 	vertical-align: baseline;
 	display: inline-block;
 	margin: 4px;
-	min-width: $pageWidth / 2;
-	max-width: $pageWidth - 200;
+	//min-width: $pageWidth / 2;
+	//max-width: $pageWidth - 200;
+	width: 100%;
 
 	// Provide eye-catching 'defaults' for uncolored notes
 	background-color: red;
@@ -154,6 +175,7 @@ mwc-icon.fab {
 	[class^="note-body-"] {
 		//margin: 0px;
 		margin: 0px 4px;
+		padding-bottom: 4px;
 	}
 }
 
