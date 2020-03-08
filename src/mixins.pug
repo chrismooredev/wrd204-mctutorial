@@ -78,7 +78,10 @@ mixin key(key)
 		when 'Win'
 			span.key.icon.fab.fa-windows
 		default
-			span.key= key
+			if key.startsWith('keyboard_arrow_')
+				span.key: +icon(key)
+			else
+				span.key= key
 
 mixin keycombo(keyarr)
 	if typeof keyarr == 'string'
