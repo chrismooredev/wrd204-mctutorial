@@ -25,14 +25,17 @@ block body
 					li If you don't get an error, and can skip this section.
 
 		h3 Installing Java
-		.windows
+		.windows.apple
 			- abbrs = { 'JRE': 'Java Runtime Environment. Regular Java without the tools needed to develop Java applications.' }
 			ul
-				li Go to the #[a(href='https://www.java.com/en/download/') download page for the Oracle Java #[abbr(title=abbrs.JRE) JRE]] and press the red #[i Java Download] button.
-				li It should auto-detect your operating system, and give you an 'Agree and Start Free Download' button to press.
-				li Read the license agreement, and hit the button to download the Java JRE installer.  
+				li Go to the #[a(href='https://www.java.com/en/download/manual.jsp') download page for the Oracle Java #[abbr(title=abbrs.JRE) JRE]] and download your system's installer.
+					ul
+						li.windows: a(href='https://javadl.oracle.com/webapps/download/AutoDL?BundleId=241534_1f5b5a70bf22433b84d0e960903adac8') Direct link to 32-bit Windows Installer
+						li.windows: a(href='https://javadl.oracle.com/webapps/download/AutoDL?BundleId=241536_1f5b5a70bf22433b84d0e960903adac8') Direct link to 64-bit Windows Installer
+						li.apple: a(href='https://javadl.oracle.com/webapps/download/AutoDL?BundleId=241527_1f5b5a70bf22433b84d0e960903adac8') Direct link to Mac OS X Installer (version 10.7.3+)
+						li: i These links are for the latest versions of Java at time of writing. These links may be out of date.
 				li Once the installer is downloaded, you should run it until Java is installed.
-		.apple macOS instructions not available.
+					div.disclaimer: i On the Java download page, there is an #[strong Instructions] link for detailed installer assistance.
 		.ubuntu
 			// linux https://docs.oracle.com/javase/8/docs/technotes/guides/install/linux_jre.html
 			// good reference https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-debian-10
