@@ -1,8 +1,43 @@
 extends content-folder.pug
 
+mixin serverprop(name, desc)
+	tr
+		td: code= name
+		td.align-left
+			block
+
 block title
 	h2 Configure Your Server
 
 block body
-	#configure-server.
-		Configure me!
+	#configure-server
+		h3 Common #[code server.properties] options
+		.section: .section#server-props
+			div
+				p Most options you will want to change for a regular server, will be located inside the #[code server.properties] file.
+				i.disclaimer This file can be found in the same folder as #[code minecraft_server.jar] and #[code eula.txt]
+				
+				p Below are common options, and their function. An exhaustive list is at the #[a(href='https://minecraft.gamepedia.com/Server.properties') Minecraft Wiki].
+			table.bordered
+				+serverprop('gamemode')
+					p Determines the default gamemode players are spawned in with.
+					p Ex: #[code survival], #[code creative], #[code adventure]
+				+serverprop('server-port')
+					p Determines the network port that the server listens to.
+					p #[code 25565] by default. Should be left unless there are multiple servers on the same machine.
+				+serverprop('motd')
+					p The message shown the the player's server list.
+					p Can be edited as is. For colors or text effects, use #[a(href='https://mctools.org/motd-creator') an online editor].
+				+serverprop('white-list')
+					p Typically for private servers. Enable this to only allow players in #[code whitelist.json] file to join.
+				+serverprop('difficulty')
+					p Use this option to change the game difficulty. Note that hardcore mode is a different property.
+					p Ex: #[code peaceful], #[code easy], #[code normal], or #[code hard].
+				+serverprop('max-players')
+					p Used to set the maximum amount of players allowed on the server at once.
+					p #[code 20] by default. Can be raised or lowered depending on your requirements.
+				+serverprop('pvp')
+					p Enables/Disables players being able to attack each other. Disabling this reduces conflict in survival mode.
+				+serverprop('spawn-protection')
+					p Allocates a square radius of blocks around spawn that can only be edited by moderators.
+					p If this is zero, then only one block at spawn is protected. Remove all server OPs to disable protections.
