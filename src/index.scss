@@ -256,6 +256,9 @@ table.bordered {
 		list-style-type: none;
 		counter-increment: item;
 		text-indent: -2em;
+		> * {
+			text-indent: initial;
+		}
 
 		&:before {
 			font-weight: bold;
