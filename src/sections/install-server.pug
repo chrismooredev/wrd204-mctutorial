@@ -15,7 +15,7 @@ block body
 		ol.spaced
 			li Create a new folder on your computer to put the server files
 				div.disclaimer: i The server will put all of its own files here, so do not use a preexisting folder!
-			li Download the latest Minecraft server .jar file from #[a(href='https://www.minecraft.net/en-us/download/server/') minecraft.net] to that new folder, and rename it to #[code minecraft_server.jar]
+			li Download the latest Minecraft server .jar file from #[a(href='https://www.minecraft.net/en-us/download/server/') minecraft.net] to that new folder, and rename the downloaded file to #[code minecraft_server.jar]
 				div.disclaimer
 					div: i Your browser may download the file to your #[code Downloads/] folder.
 					div.indent: i If so, move the file to your new folder, and rename it.
@@ -23,6 +23,13 @@ block body
 			li Open a terminal inside that new folder, to run your Minecraft server in.
 			+ossection(os.windows).
 				To open a terminal inside a folder, shift-right click on an empty part in the folder, and choose 'Open Powershell Window Here' or 'Open Command Window Here'
+			+ossection(os.macos)
+				div You can open a new terminal by searching #[code terminal] in Spotlight (#[+keycombo(['⌘'+'Space'])])
+				div.disclaimer: i If you opened a new terminal, you may need to run the code snippet at the beginning of the 'Install Java' section.
+				ol
+					li Right-click inside the folder with the server .jar, and click 'Get Info'
+					li Copy the 'Where' entry to copy the folder path to your clipboard.
+					li In the terminal, run #[code cd '&lt;folder path&gt;']
 			li In your terminal, #[abbr(title=abbrs.run) run] the following command:
 				div: code java -Xms1024M -Xmx2048M  -jar minecraft_server.jar -nogui
 				div.disclaimer: i

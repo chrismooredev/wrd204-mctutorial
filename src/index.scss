@@ -97,7 +97,7 @@ ul, ol {
 	margin: 0.75em;
 }
 
-code {
+code, pre {
 	background-color: #3f3f3f;
 	border-radius: 4px;
 	border: 1px solid #6d6d6d;
@@ -108,8 +108,8 @@ code {
 	font-family: "Courier New", Courier, monospace;
 	line-height: 1.8em;
 }
-:not([class^="note-container"]) h3 {
-	color: #ffffffd1;
+pre {
+	white-space: pre-wrap;
 }
 
 mwc-textfield {
@@ -190,10 +190,9 @@ mwc-icon.fab {
 	h3 { color: black; }
 }
 .note-container-info {
-	background-color: #6655ff;
-	border: solid #1414b5;
-	color: black;
-	h3 { color: black; }
+	background-color: #6c3a00;
+	border: solid #523200;
+	color: #e5e5e5;
 }
 .note-container-ossection {
 	//background-color: #ffffff12;

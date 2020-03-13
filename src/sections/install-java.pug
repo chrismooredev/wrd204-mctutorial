@@ -5,6 +5,14 @@ block title
 
 block body
 	#install-java
+		+ossection(os.macos)
+			div On a Mac, it is recommended to get started by first opening a terminal. You can search for #[code terminal] in Spotlight (#[+keycombo(["⌘", "Space"])]).
+			p Copy/Paste the following code in your terminal to make it easier to use java:
+				pre.
+					function java() {
+						"/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin/java" "$@" ;
+					}
+			div If you later get an error saying #[code command not found], you may need to repeat the above.
 		+note({type: 'info', title: 'Do I need to do this?'})
 			- pathdef = 'The path is a shared list of folders that programs can use to find other programs.'
 			| If you have previously installed Java, that will work for the server.
@@ -33,7 +41,7 @@ block body
 						li.windows: a(href='https://javadl.oracle.com/webapps/download/AutoDL?BundleId=241534_1f5b5a70bf22433b84d0e960903adac8') Direct link to 32-bit Windows Installer
 						li.windows: a(href='https://javadl.oracle.com/webapps/download/AutoDL?BundleId=241536_1f5b5a70bf22433b84d0e960903adac8') Direct link to 64-bit Windows Installer
 						li.apple: a(href='https://javadl.oracle.com/webapps/download/AutoDL?BundleId=241527_1f5b5a70bf22433b84d0e960903adac8') Direct link to Mac OS X Installer (version 10.7.3+)
-						li: i These links are for the latest versions of Java at time of writing. These links may be out of date.
+						li: i These links are for the latest versions of Java at time of writing. They may be out of date.
 				li Once the installer is downloaded, you should run it until Java is installed.
 					div.disclaimer: i On the Java download page, there is an #[strong Instructions] link for detailed installer assistance.
 		.ubuntu
@@ -61,5 +69,5 @@ block body
 					3. Double click on the `Path` entry to edit it
 					4. Click `New` and paste the previously-copied Java bin folder location into the new row
 					5. Hit `Ok` until the opened windows are closed
-		.apple macOS instructions not available.
+		.apple Double-check that the installation was successful by running #[code java] in your terminal. If you get a #[code command not found] error, you may have to repeat the code block above.
 		.ubuntu For Linux systems, installation should have already put Java on your path.
