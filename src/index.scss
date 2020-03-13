@@ -106,6 +106,10 @@ code {
 	font-size: 0.9em;
 	white-space: nowrap;
 	font-family: "Courier New", Courier, monospace;
+	line-height: 1.8em;
+}
+:not([class^="note-container"]) h3 {
+	color: #ffffffd1;
 }
 
 mwc-textfield {
@@ -183,11 +187,13 @@ mwc-icon.fab {
 	background-color: #ffff53;
 	border: solid #ffa700;
 	color: black;
+	h3 { color: black; }
 }
 .note-container-info {
 	background-color: #6655ff;
 	border: solid #1414b5;
 	color: black;
+	h3 { color: black; }
 }
 .note-container-ossection {
 	//background-color: #ffffff12;
@@ -235,6 +241,29 @@ table.bordered {
 	}
 	.align-left {
 		text-align: left;
+	}
+}
+#reqtable {
+	th, td {
+		padding-left: 1em;
+		padding-right: 1em;
+	}
+}
+// Only top level numbers for server installation section
+#install-server > ol {
+	counter-reset: item;
+
+	> li {
+		list-style-type: none;
+		counter-increment: item;
+		text-indent: -2em;
+
+		&:before {
+			font-weight: bold;
+			color: #ffffffd1;
+			content: counter(item) ".";
+			padding-right: 0.5em;
+		}
 	}
 }
 
