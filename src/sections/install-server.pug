@@ -16,8 +16,11 @@ block body
 			li Create a new folder on your computer to put the server files
 				div.disclaimer: i The server will put all of its own files here, so do not use a preexisting folder!
 			li Download the latest Minecraft server .jar file from #[a(href='https://www.minecraft.net/en-us/download/server/') minecraft.net] to that new folder, and rename it to #[code minecraft_server.jar]
-				div.disclaimer: i If Minecraft updates in the future, you can simply replace your existing minecraft_server.jar with an updated one!
-			li Open a terminal inside that new folder, to run your Minecraft server in.			
+				div.disclaimer
+					div: i Your browser may download the file to your #[code Downloads/] folder.
+					div.indent: i If so, move the file to your new folder, and rename it.
+				div.disclaimer: i If the filename doesn't show #[code .jar] when you go to rename it, you may not need it.
+			li Open a terminal inside that new folder, to run your Minecraft server in.
 			+ossection(os.windows).
 				To open a terminal inside a folder, shift-right click on an empty part in the folder, and choose 'Open Powershell Window Here' or 'Open Command Window Here'
 			li In your terminal, #[abbr(title=abbrs.run) run] the following command:
