@@ -26,14 +26,15 @@ block body
 			+ossection(os.macos)
 				div You can open a new terminal by searching #[code terminal] in Spotlight (#[+keycombo(['⌘','Space'])])
 				div.disclaimer: i If you opened a new terminal, you may need to run the code snippet at the beginning of the 'Install Java' section.
+				div To enter your server's folder in the terminal:
 				ol
 					li Right-click inside the folder with the server .jar, and click 'Get Info'
 					li Copy the 'Where' entry to copy the folder path to your clipboard.
-					li In the terminal, run #[code cd '&lt;folder path&gt;']
+					li In the terminal, run #[code= `cd '<folder path>'`]
 			li In your terminal, #[abbr(title=abbrs.run) run] the following command:
-				div: code java -Xms1024M -Xmx2048M  -jar minecraft_server.jar -nogui
+				div: code= `java -Xms1024M -Xmx<amount>M  -jar minecraft_server.jar -nogui`
 				div.disclaimer: i
-					p Change #[code 2048] to be 1024 times the #[a(href='#reqtable') suggested RAM amount]. (ex: 3 GB -> #[code -Xmx3072M])
+					p Change #[code= '<amount>'] to be 1024 times the #[a(href='#reqtable') suggested RAM amount]. (ex: 2 GB * 1024 = 2048 -> #[code -Xmx2048M])
 					p If the server immediately crashes with the word 'heap', possible culprits include these options or your Java installation.
 			li The server will immediately exit, because you need to agree to the server #[abbr(title=abbrs.EULA) EULA].
 			li Open the new #[code eula.txt] file, read the #[abbr(title=abbrs.EULA) EULA], and replace #[code eula=false] with #[code eula=true]
