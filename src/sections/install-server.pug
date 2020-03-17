@@ -19,7 +19,7 @@ block body
 				div.disclaimer
 					div: i Your browser may download the file to your #[code Downloads/] folder.
 					div.indent: i If so, move the file to your new folder, and rename it.
-				div.disclaimer: i If the filename doesn't show #[code .jar] when you go to rename it, you may not need it.
+				div.disclaimer.windows: i If the filename did not originally show #[code .jar] when you go to rename it, do not add it (eg: rename to #[code minecraft_server] instead of #[code minecraft_server.jar]).
 			li Open a terminal inside that new folder, to run your Minecraft server in.
 			+ossection(os.windows).
 				To open a terminal inside a folder, shift-right click on an empty part in the folder, and choose 'Open Powershell Window Here' or 'Open Command Window Here'
@@ -38,6 +38,7 @@ block body
 					p If the server immediately crashes with the word 'heap', possible culprits include these options or your Java installation.
 			li The server will immediately exit, because you need to agree to the server #[abbr(title=abbrs.EULA) EULA].
 			li Open the new #[code eula.txt] file, read the #[abbr(title=abbrs.EULA) EULA], and replace #[code eula=false] with #[code eula=true]
+				div.disclaimer: i The #[code eula.txt] is in the same folder as your #[code minecraft.jar]
 			li Run the same command you used earlier again (you can press #[+keycombo('keyboard_arrow_up')] to bring it back)
 			+ossection(os.windows) A window may pop up to allow your Minecraft server through the firewall. You should allow it through.
 		h3 You now have a fully functioning Minecraft server!
