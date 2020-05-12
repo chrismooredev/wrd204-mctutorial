@@ -1,0 +1,19 @@
+
+Testing feedback/observations
+
+user test 1
+    reword `locate the path entry` to say it isn't a button
+    reference suggested RAM table near the top when putting commandline ram amount
+    how to kill it?
+
+user test 2 ?
+    just general confusion about how the computers work lol
+
+discussion posts
+    theme info box to green?
+    recommended specs table wider?
+    increase line height for code-using sections
+        line-height css on code?
+    bold direction numbers?
+    highlighting header size/color?
+
