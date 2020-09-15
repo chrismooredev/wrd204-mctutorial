@@ -11,24 +11,24 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/highlight.js": "^9.12.3",
+    "@types/highlight.js": "^9.12.4",
     "jstransformer-markdown-it": "^2.1.0",
     "markdown-it-abbr": "^1.0.4",
     "parcel-bundler": "^1.12.4",
     "pug-cli": "^1.0.0-alpha6",
-    "sass": "^1.25.0",
-    "typescript": "^3.7.5"
+    "sass": "^1.26.10",
+    "typescript": "^3.9.7"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.12.1",
-    "@material/auto-init": "^5.0.0",
+    "@fortawesome/fontawesome-free": "^5.14.0",
+    "@material/auto-init": "^5.1.0",
     "@material/mwc-button": "^0.13.0",
     "@material/mwc-icon": "^0.13.0",
     "@material/mwc-tab": "^0.13.0",
     "@material/mwc-tab-bar": "^0.13.0",
     "@material/mwc-textfield": "^0.13.0",
-    "@webcomponents/webcomponentsjs": "^2.4.1",
-    "highlight.js": "^9.18.1",
-    "material-components-web": "^5.0.0"
+    "@webcomponents/webcomponentsjs": "^2.4.4",
+    "highlight.js": "^9.18.3",
+    "material-components-web": "^5.1.0"
   }
 }
