@@ -16,19 +16,19 @@
     "markdown-it-abbr": "^1.0.4",
     "parcel-bundler": "^1.12.4",
     "pug-cli": "^1.0.0-alpha6",
-    "sass": "^1.26.10",
-    "typescript": "^3.9.7"
+    "sass": "^1.32.8",
+    "typescript": "^3.9.9"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.14.0",
+    "@fortawesome/fontawesome-free": "^5.15.2",
     "@material/auto-init": "^5.1.0",
     "@material/mwc-button": "^0.13.0",
     "@material/mwc-icon": "^0.13.0",
     "@material/mwc-tab": "^0.13.0",
     "@material/mwc-tab-bar": "^0.13.0",
     "@material/mwc-textfield": "^0.13.0",
-    "@webcomponents/webcomponentsjs": "^2.4.4",
-    "highlight.js": "^10.4.1",
+    "@webcomponents/webcomponentsjs": "^2.5.0",
+    "highlight.js": "^10.6.0",
     "material-components-web": "^5.1.0"
   }
 }
